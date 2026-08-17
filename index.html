@@ -150,6 +150,32 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
 .rolelabel{ font-weight:700; color:var(--eon-purple); }
 .rolename{ font-weight:700; color:var(--text); }
 
+/* Weekly role box: this week + next week side by side */
+#weekly .weekly-rolebox{
+  min-width:440px;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:0;
+  padding:10px 12px;
+}
+
+#weekly .roleweek{
+  padding:0 12px;
+}
+
+#weekly .roleweek:first-child{
+  border-right:1px solid #e7e2ea;
+}
+
+#weekly .roleweek-title{
+  font-size:12px;
+  font-weight:800;
+  color:var(--eon-red);
+  text-transform:uppercase;
+  letter-spacing:.4px;
+  margin:0 0 4px 2px;
+}
+
 /* LAYOUT */
 .container{
   display:grid;
@@ -228,6 +254,23 @@ li{ margin-bottom:10px; line-height:1.45; }
   body{ padding:18px; }
   .container{ grid-template-columns:1fr; }
   .rolebox{ width:min(420px, 92vw); }
+
+  #weekly .weekly-rolebox{
+    min-width:0;
+    width:min(420px, 92vw);
+    grid-template-columns:1fr;
+  }
+
+  #weekly .roleweek{
+    padding:6px 4px;
+  }
+
+  #weekly .roleweek:first-child{
+    border-right:none;
+    border-bottom:1px solid #e7e2ea;
+    padding-bottom:10px;
+    margin-bottom:4px;
+  }
 }
 </style>
 </head>
@@ -245,14 +288,29 @@ li{ margin-bottom:10px; line-height:1.45; }
     </div>
   </div>
 
-  <div class="rolebox" aria-label="Roles">
-    <div class="roleline">
-      <div class="rolelabel">Moderator:</div>
-      <div class="rolename" id="roleModerator">–</div>
+  <div class="rolebox weekly-rolebox" aria-label="Roles">
+    <div class="roleweek">
+      <div class="roleweek-title" id="currentWeekLabel">This week</div>
+      <div class="roleline">
+        <div class="rolelabel">Moderator:</div>
+        <div class="rolename" id="roleModerator">–</div>
+      </div>
+      <div class="roleline">
+        <div class="rolelabel">Timekeeper:</div>
+        <div class="rolename" id="roleTimekeeper">–</div>
+      </div>
     </div>
-    <div class="roleline">
-      <div class="rolelabel">Timekeeper:</div>
-      <div class="rolename" id="roleTimekeeper">–</div>
+
+    <div class="roleweek">
+      <div class="roleweek-title" id="nextWeekLabel">Next week</div>
+      <div class="roleline">
+        <div class="rolelabel">Moderator:</div>
+        <div class="rolename" id="nextRoleModerator">–</div>
+      </div>
+      <div class="roleline">
+        <div class="rolelabel">Timekeeper:</div>
+        <div class="rolename" id="nextRoleTimekeeper">–</div>
+      </div>
     </div>
   </div>
 </div>
@@ -311,7 +369,7 @@ li{ margin-bottom:10px; line-height:1.45; }
         <td>4</td>
         <td>8.40</td>
         <td>Moderator</td>
-        <td>Allocating recruitments + SF left</td>
+        <td>Allocating recruitments</td>
       </tr>
 
       <tr>
@@ -424,22 +482,46 @@ const mondayLines = document.querySelectorAll("#mondays span");
 if (mondayLines[mondayIndex]) mondayLines[mondayIndex].classList.add("bold");
 
 /* Roles rotation:
-   Team order: Josefin, Ellinor, Jonathan, Fredrik, Marvin, Linda, Julia
-   Start point: v17 Moderator=Marvin, Timekeeper=Sigrun
-   Timekeeper this week becomes Moderator next week
+   Team order: Josefin, Ellinor, Jonathan, Fredrik, Marvin, Linda, Julia, Anna
+   Anna is added after Julia.
+   Anchor: Monday 17 Aug 2026 (v34), when Moderator=Josefin and Timekeeper=Ellinor.
+   Using a real date as anchor keeps the rotation correct across New Year.
+   Timekeeper this week becomes Moderator next week.
 */
-const team = ["Josefin","Ellinor","Jonathan","Fredrik","Marvin","Linda","Julia"];
-const baseWeek = 17;
-const baseModerator = "Marvin";
+const team = ["Josefin","Ellinor","Jonathan","Fredrik","Marvin","Linda","Julia","Anna"];
+const baseModerator = "Josefin";
+const rotationBaseMonday = new Date(2026, 7, 17); // 17 Aug 2026
+
+function getMonday(date){
+  const d = new Date(date);
+  d.setHours(0,0,0,0);
+  const day = (d.getDay() + 6) % 7; // Monday = 0
+  d.setDate(d.getDate() - day);
+  return d;
+}
+
+const currentMonday = getMonday(new Date());
+const weeksFromBase = Math.round(
+  (currentMonday - rotationBaseMonday) / (7 * 24 * 60 * 60 * 1000)
+);
 
 const baseModIndex = team.indexOf(baseModerator);
-const offset = week - baseWeek;
-
-const modIndex = ((baseModIndex + offset) % team.length + team.length) % team.length;
+const modIndex = ((baseModIndex + weeksFromBase) % team.length + team.length) % team.length;
 const tkIndex = (modIndex + 1) % team.length;
+const nextModIndex = tkIndex;
+const nextTkIndex = (nextModIndex + 1) % team.length;
+
+const nextWeekDate = new Date(currentMonday);
+nextWeekDate.setDate(nextWeekDate.getDate() + 7);
+const nextWeek = getISOWeek(nextWeekDate);
 
 document.getElementById("roleModerator").innerText = team[modIndex];
 document.getElementById("roleTimekeeper").innerText = team[tkIndex];
+document.getElementById("nextRoleModerator").innerText = team[nextModIndex];
+document.getElementById("nextRoleTimekeeper").innerText = team[nextTkIndex];
+
+document.getElementById("currentWeekLabel").innerText = `This week · v${week}`;
+document.getElementById("nextWeekLabel").innerText = `Next week · v${nextWeek}`;
 </script>
 
 </body>
