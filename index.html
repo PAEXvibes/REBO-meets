@@ -61,13 +61,6 @@
 <!-- WEEKLY -->
 <div id="weekly" class="content-section active">
 
-    <!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>REBO Weekly meeting</title>
-
 <style>
 :root{
   --eon-red:#e6001a;
@@ -81,11 +74,16 @@
   --radius:20px;
 }
 
+*{
+  box-sizing:border-box;
+  font-family:"Segoe UI",Arial,sans-serif;
+}
 
-*{box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif;}
-body{margin:0;padding:28px;background:var(--bg);color:var(--text);}
-
-h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
+h1{
+  text-align:center;
+  font-size:38px;
+  margin:0 0 18px 0;
+}
 
 /* TOP: timer + role box */
 .topbar{
@@ -97,7 +95,9 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
   margin-bottom:26px;
 }
 
-.timer-column{ text-align:center; }
+.timer-column{
+  text-align:center;
+}
 
 .timer{
   font-size:28px;
@@ -111,7 +111,10 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
   min-width:120px;
 }
 
-.timer-buttons{ margin-top:10px; }
+.timer-buttons{
+  margin-top:10px;
+}
+
 .timer-buttons button{
   margin:0 6px;
   padding:6px 14px;
@@ -132,6 +135,7 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
   padding:10px 12px;
   position:relative;
 }
+
 .rolebox::before{
   content:"";
   position:absolute;
@@ -140,6 +144,7 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
   background:var(--gradient);
   z-index:-1;
 }
+
 .roleline{
   display:flex;
   justify-content:space-between;
@@ -147,8 +152,16 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
   padding:4px 2px;
   font-size:14px;
 }
-.rolelabel{ font-weight:700; color:var(--eon-purple); }
-.rolename{ font-weight:700; color:var(--text); }
+
+.rolelabel{
+  font-weight:700;
+  color:var(--eon-purple);
+}
+
+.rolename{
+  font-weight:700;
+  color:var(--text);
+}
 
 /* Weekly role box: this week + next week side by side */
 #weekly .weekly-rolebox{
@@ -204,15 +217,42 @@ h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
 }
 
 /* TABLE */
-table{ width:100%; border-collapse:collapse; }
-th{ text-align:left; padding-bottom:10px; font-size:15px; }
-td{ padding:8px 6px; vertical-align:top; }
-tr:not(:last-child) td{ border-bottom:1px solid #eee; }
+table{
+  width:100%;
+  border-collapse:collapse;
+}
+
+th{
+  text-align:left;
+  padding-bottom:10px;
+  font-size:15px;
+}
+
+td{
+  padding:8px 6px;
+  vertical-align:top;
+}
+
+tr:not(:last-child) td{
+  border-bottom:1px solid #eee;
+}
 
 /* Agenda details */
-.agenda-details{ margin-top:8px; font-size:14px; line-height:1.5; }
-.agenda-details span{ display:block; margin-top:4px; }
-.bold{ font-weight:800; color:var(--eon-red); }
+.agenda-details{
+  margin-top:8px;
+  font-size:14px;
+  line-height:1.5;
+}
+
+.agenda-details span{
+  display:block;
+  margin-top:4px;
+}
+
+.bold{
+  font-weight:800;
+  color:var(--eon-red);
+}
 
 /* Info tooltip */
 .info{
@@ -231,6 +271,7 @@ tr:not(:last-child) td{ border-bottom:1px solid #eee; }
   cursor:default;
   vertical-align:middle;
 }
+
 .info img{
   position:absolute;
   top:26px;
@@ -243,17 +284,36 @@ tr:not(:last-child) td{ border-bottom:1px solid #eee; }
   z-index:50;
   background:#fff;
 }
-.info:hover img{ display:block; }
+
+.info:hover img{
+  display:block;
+}
 
 /* HEADLINES + guidelines */
-h2{ margin:12px 0; font-size:20px; color:var(--eon-purple); }
-ul{ padding-left:18px; margin:8px 0 0 0; }
-li{ margin-bottom:10px; line-height:1.45; }
+h2{
+  margin:12px 0;
+  font-size:20px;
+  color:var(--eon-purple);
+}
+
+ul{
+  padding-left:18px;
+  margin:8px 0 0 0;
+}
+
+li{
+  margin-bottom:10px;
+  line-height:1.45;
+}
 
 @media (max-width: 900px){
-  body{ padding:18px; }
-  .container{ grid-template-columns:1fr; }
-  .rolebox{ width:min(420px, 92vw); }
+  .container{
+    grid-template-columns:1fr;
+  }
+
+  .rolebox{
+    width:min(420px, 92vw);
+  }
 
   #weekly .weekly-rolebox{
     min-width:0;
@@ -273,15 +333,14 @@ li{ margin-bottom:10px; line-height:1.45; }
   }
 }
 </style>
-</head>
-
-<body>
 
 <h1>REBO Weekly meeting</h1>
 
 <div class="topbar">
+
   <div class="timer-column">
     <div class="timer" id="timer">05:00</div>
+
     <div class="timer-buttons">
       <button type="button" onclick="startTimer(5)">5 min</button>
       <button type="button" onclick="startTimer(15)">15 min</button>
@@ -289,41 +348,59 @@ li{ margin-bottom:10px; line-height:1.45; }
   </div>
 
   <div class="rolebox weekly-rolebox" aria-label="Roles">
+
     <div class="roleweek">
-      <div class="roleweek-title" id="currentWeekLabel">This week</div>
+
+      <div class="roleweek-title" id="currentWeekLabel">
+        This week
+      </div>
+
       <div class="roleline">
         <div class="rolelabel">Moderator:</div>
         <div class="rolename" id="roleModerator">–</div>
       </div>
+
       <div class="roleline">
         <div class="rolelabel">Timekeeper:</div>
         <div class="rolename" id="roleTimekeeper">–</div>
       </div>
+
     </div>
 
     <div class="roleweek">
-      <div class="roleweek-title" id="nextWeekLabel">Next week</div>
+
+      <div class="roleweek-title" id="nextWeekLabel">
+        Next week
+      </div>
+
       <div class="roleline">
         <div class="rolelabel">Moderator:</div>
         <div class="rolename" id="nextRoleModerator">–</div>
       </div>
+
       <div class="roleline">
         <div class="rolelabel">Timekeeper:</div>
         <div class="rolename" id="nextRoleTimekeeper">–</div>
       </div>
+
     </div>
+
   </div>
+
 </div>
+
 
 <div class="container">
 
   <!-- LEFT: CLOCK + AGENDA -->
   <div class="card">
+
     <div class="clock" id="clock">--:--</div>
 
     <h2>Agenda</h2>
 
     <table>
+
       <tr>
         <th style="width:52px;">#</th>
         <th style="width:86px;">Time</th>
@@ -335,21 +412,34 @@ li{ margin-bottom:10px; line-height:1.45; }
         <td>1</td>
         <td>8.15</td>
         <td>Moderator</td>
+
         <td>
+
           Team success
-          <span class="info" title="Team Success info">i
-            <!-- Byt src till rätt filnamn eller URL där bilden ligger -->
+
+          <span class="info" title="Team Success info">
+            i
             <img src="team-success.png" alt="Team Success" />
           </span>
 
           <div class="agenda-details" id="mondays">
+
             <span>1st Monday: Gratitude circle</span>
+
             <span>2nd Monday: Acknowledge others</span>
+
             <span>3rd Monday: Be proud in a short sentence</span>
-            <span>4th Monday: What have you learned lately in a short sentence</span>
+
+            <span>
+              4th Monday: What have you learned lately in a short sentence
+            </span>
+
           </div>
+
         </td>
+
       </tr>
+
 
       <tr>
         <td>2</td>
@@ -358,12 +448,14 @@ li{ margin-bottom:10px; line-height:1.45; }
         <td>Management update</td>
       </tr>
 
+
       <tr>
         <td>3</td>
         <td>8.25</td>
         <td>All</td>
         <td>Update, highlights, problem, help</td>
       </tr>
+
 
       <tr>
         <td>4</td>
@@ -372,6 +464,7 @@ li{ margin-bottom:10px; line-height:1.45; }
         <td>Allocating recruitments</td>
       </tr>
 
+
       <tr>
         <td>5</td>
         <td>8.45</td>
@@ -379,454 +472,831 @@ li{ margin-bottom:10px; line-height:1.45; }
         <td>Actions forward</td>
       </tr>
 
+
       <tr>
         <td>6</td>
         <td>8.50</td>
         <td>All</td>
         <td>Feedback meeting</td>
       </tr>
+
     </table>
+
   </div>
+
 
   <!-- RIGHT: GUIDELINES -->
   <div class="card">
+
     <h2>REBO Guidelines</h2>
+
     <ul>
+
       <li>We start and end in time</li>
+
       <li>We come prepared to the meeting</li>
+
       <li>There will always be a moderator and timekeeper</li>
-      <li>If you are not present, hand over the information to someone else</li>
+
+      <li>
+        If you are not present, hand over the information to someone else
+      </li>
+
       <li>We act with good intentions</li>
+
       <li>We listen to each other</li>
+
       <li>We help each other and offer support</li>
+
       <li>We dare to tell our thoughts</li>
+
       <li>We give constructive feedback</li>
+
       <li>We give sensitive feedback in JF</li>
-      <div class="actions-box">
-        <a 
-          href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a
-          target="_blank"
-          rel="noopener"
-        >
-         
-        
-        
-        ✅ Actions – REBO Planner
-          
-        </a>
-        
-      </div>
+
     </ul>
+
+
+    <div class="actions-box">
+
+      <a
+        href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a"
+        target="_blank"
+        rel="noopener"
+      >
+        ✅ Actions – REBO Planner
+      </a>
+
+    </div>
+
   </div>
 
 </div>
 
-<span class="info">i
-  <img src="team-success.png" alt="Team Success info">
-</span>
 
 <script>
-/* Stockholm clock */
-function updateClock(){
-  const now = new Date().toLocaleTimeString("sv-SE", {
-    timeZone: "Europe/Stockholm",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-  document.getElementById("clock").innerText = now;
-}
-updateClock();
-setInterval(updateClock, 1000);
 
-/* Countdown timer */
+/* =========================
+   WEEKLY STOCKHOLM CLOCK
+========================= */
+
+function updateClock(){
+
+  const now = new Date().toLocaleTimeString("sv-SE", {
+
+    timeZone: "Europe/Stockholm",
+
+    hour: "2-digit",
+
+    minute: "2-digit"
+
+  });
+
+  document.getElementById("clock").innerText = now;
+
+}
+
+updateClock();
+
+setInterval(updateClock,1000);
+
+
+/* =========================
+   WEEKLY COUNTDOWN TIMER
+========================= */
+
 let timerInterval;
+
 function startTimer(minutes){
+
   clearInterval(timerInterval);
+
   let seconds = minutes * 60;
 
   function render(){
-    const min = String(Math.floor(seconds / 60)).padStart(2, "0");
-    const sec = String(seconds % 60).padStart(2, "0");
-    document.getElementById("timer").innerText = `${min}:${sec}`;
+
+    const min =
+      String(Math.floor(seconds / 60)).padStart(2,"0");
+
+    const sec =
+      String(seconds % 60).padStart(2,"0");
+
+    document.getElementById("timer").innerText =
+      `${min}:${sec}`;
+
   }
 
   render();
+
   timerInterval = setInterval(() => {
+
     seconds -= 1;
-    if (seconds < 0){
+
+    if(seconds < 0){
+
       clearInterval(timerInterval);
+
       return;
+
     }
+
     render();
-  }, 1000);
+
+  },1000);
+
 }
 
-/* ISO week number */
+
+/* =========================
+   ISO WEEK NUMBER
+========================= */
+
 function getISOWeek(date){
+
   const d = new Date(date);
+
   d.setHours(0,0,0,0);
-  d.setDate(d.getDate() + 3 - (d.getDay() + 6) % 7);
-  const week1 = new Date(d.getFullYear(), 0, 4);
-  return 1 + Math.round(((d - week1) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+
+  d.setDate(
+    d.getDate() +
+    3 -
+    (d.getDay()+6)%7
+  );
+
+  const week1 =
+    new Date(d.getFullYear(),0,4);
+
+  return 1 + Math.round(
+
+    (
+      (d-week1)/86400000
+      -
+      3
+      +
+      (week1.getDay()+6)%7
+    ) / 7
+
+  );
+
 }
 
-const week = getISOWeek(new Date());
 
-/* Bold correct Monday:
-   v16 => 3rd Monday
-   v17 => 4th Monday
-   v18 => 1st Monday
-*/
-const mondayIndex = ((week - 14) % 4 + 4) % 4;
-const mondayLines = document.querySelectorAll("#mondays span");
-if (mondayLines[mondayIndex]) mondayLines[mondayIndex].classList.add("bold");
+const week =
+  getISOWeek(new Date());
 
-/* Roles rotation:
-   Team order: Josefin, Ellinor, Jonathan, Fredrik, Marvin, Linda, Julia, Anna
-   Anna is added after Julia.
-   Anchor: Monday 17 Aug 2026 (v34), when Moderator=Josefin and Timekeeper=Ellinor.
-   Using a real date as anchor keeps the rotation correct across New Year.
-   Timekeeper this week becomes Moderator next week.
-*/
-const team = ["Josefin","Ellinor","Jonathan","Fredrik","Marvin","Linda","Julia","Anna"];
-const baseModerator = "Josefin";
-const rotationBaseMonday = new Date(2026, 7, 17); // 17 Aug 2026
+
+/* =========================
+   MONDAY ACTIVITY
+========================= */
+
+const mondayIndex =
+  ((week-14)%4+4)%4;
+
+const mondayLines =
+  document.querySelectorAll("#mondays span");
+
+if(mondayLines[mondayIndex]){
+
+  mondayLines[mondayIndex]
+    .classList.add("bold");
+
+}
+
+
+/* =========================
+   WEEKLY ROLE ROTATION
+
+   Josefin
+   Ellinor
+   Jonathan
+   Fredrik
+   Marvin
+   Linda
+   Julia
+   Anna
+========================= */
+
+const team = [
+
+  "Josefin",
+
+  "Ellinor",
+
+  "Jonathan",
+
+  "Fredrik",
+
+  "Marvin",
+
+  "Linda",
+
+  "Julia",
+
+  "Anna"
+
+];
+
+
+const baseModerator =
+  "Josefin";
+
+
+const rotationBaseMonday =
+  new Date(2026,7,17);
+
 
 function getMonday(date){
-  const d = new Date(date);
+
+  const d =
+    new Date(date);
+
   d.setHours(0,0,0,0);
-  const day = (d.getDay() + 6) % 7; // Monday = 0
-  d.setDate(d.getDate() - day);
+
+  const day =
+    (d.getDay()+6)%7;
+
+  d.setDate(
+    d.getDate()-day
+  );
+
   return d;
+
 }
 
-const currentMonday = getMonday(new Date());
-const weeksFromBase = Math.round(
-  (currentMonday - rotationBaseMonday) / (7 * 24 * 60 * 60 * 1000)
+
+const currentMonday =
+  getMonday(new Date());
+
+
+const weeksFromBase =
+  Math.round(
+
+    (
+      currentMonday -
+      rotationBaseMonday
+    )
+    /
+    (
+      7 *
+      24 *
+      60 *
+      60 *
+      1000
+    )
+
+  );
+
+
+const baseModIndex =
+  team.indexOf(baseModerator);
+
+
+const modIndex =
+  (
+    (
+      baseModIndex +
+      weeksFromBase
+    )
+    %
+    team.length
+    +
+    team.length
+  )
+  %
+  team.length;
+
+
+const tkIndex =
+  (modIndex+1)
+  %
+  team.length;
+
+
+const nextModIndex =
+  tkIndex;
+
+
+const nextTkIndex =
+  (nextModIndex+1)
+  %
+  team.length;
+
+
+const nextWeekDate =
+  new Date(currentMonday);
+
+
+nextWeekDate.setDate(
+  nextWeekDate.getDate()+7
 );
 
-const baseModIndex = team.indexOf(baseModerator);
-const modIndex = ((baseModIndex + weeksFromBase) % team.length + team.length) % team.length;
-const tkIndex = (modIndex + 1) % team.length;
-const nextModIndex = tkIndex;
-const nextTkIndex = (nextModIndex + 1) % team.length;
 
-const nextWeekDate = new Date(currentMonday);
-nextWeekDate.setDate(nextWeekDate.getDate() + 7);
-const nextWeek = getISOWeek(nextWeekDate);
+const nextWeek =
+  getISOWeek(nextWeekDate);
 
-document.getElementById("roleModerator").innerText = team[modIndex];
-document.getElementById("roleTimekeeper").innerText = team[tkIndex];
-document.getElementById("nextRoleModerator").innerText = team[nextModIndex];
-document.getElementById("nextRoleTimekeeper").innerText = team[nextTkIndex];
 
-document.getElementById("currentWeekLabel").innerText = `This week · v${week}`;
-document.getElementById("nextWeekLabel").innerText = `Next week · v${nextWeek}`;
+document.getElementById("roleModerator")
+  .innerText =
+  team[modIndex];
+
+
+document.getElementById("roleTimekeeper")
+  .innerText =
+  team[tkIndex];
+
+
+document.getElementById("nextRoleModerator")
+  .innerText =
+  team[nextModIndex];
+
+
+document.getElementById("nextRoleTimekeeper")
+  .innerText =
+  team[nextTkIndex];
+
+
+document.getElementById("currentWeekLabel")
+  .innerText =
+  `This week · v${week}`;
+
+
+document.getElementById("nextWeekLabel")
+  .innerText =
+  `Next week · v${nextWeek}`;
+
 </script>
-
-</body>
 
 </div>
 
-<!-- MONTHLY -->
+
+
+<!-- =========================
+     MONTHLY
+========================= -->
+
 <div id="monthly" class="content-section">
 
-    <!DOCTYPE html>
-<html lang="sv">
-<head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>REBO monthly meeting</title>
-
-<style>
-:root{
-  --eon-red:#e6001a;
-  --eon-purple:#7a1f8a;
-  --gradient: linear-gradient(135deg, var(--eon-red), var(--eon-purple));
-
-  --bg:#f6f5f8;
-  --card:#ffffff;
-  --text:#2b2b2b;
-  --shadow:0 10px 22px rgba(0,0,0,0.08);
-  --radius:20px;
-}
-
-*{box-sizing:border-box;font-family:"Segoe UI",Arial,sans-serif;}
-body{margin:0;padding:28px;background:var(--bg);color:var(--text);}
-
-h1{ text-align:center; font-size:38px; margin:0 0 18px 0; }
-
-.topbar{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-bottom:26px;
-}
-
-.timer-column{ text-align:center; }
-
-.timer{
-  font-size:28px;
-  font-weight:700;
-  padding:10px 22px;
-  border-radius:14px;
-  background:var(--gradient);
-  color:#fff;
-  display:inline-block;
-  box-shadow:var(--shadow);
-  min-width:120px;
-}
-
-.timer-buttons{ margin-top:10px; }
-.timer-buttons button{
-  margin:0 6px;
-  padding:6px 14px;
-  font-size:14px;
-  border-radius:999px;
-  border:none;
-  background:#fff;
-  cursor:pointer;
-  box-shadow:var(--shadow);
-}
-
-.rolebox{
-  min-width:260px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(0,0,0,0.04);
-  padding:12px 14px;
-  position:relative;
-}
-.rolebox::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:18px;
-  background:var(--gradient);
-  z-index:-1;
-}
-.roleline{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:4px 2px;
-  font-size:14px;
-}
-.rolelabel{ font-weight:700; color:var(--eon-purple); }
-.rolename{ font-weight:700; color:var(--text); }
-
-.container{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:22px;
-}
-
-.card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:20px 22px;
-  box-shadow:var(--shadow);
-}
-
-.clock{
-  font-size:34px;
-  font-weight:750;
-  padding:10px 18px;
-  border-radius:16px;
-  background:var(--gradient);
-  color:#fff;
-  display:inline-block;
-  margin-bottom:14px;
-}
-
-table{ width:100%; border-collapse:collapse; }
-th{ text-align:left; padding-bottom:10px; font-size:15px; }
-td{ padding:8px 6px; vertical-align:top; }
-tr:not(:last-child) td{ border-bottom:1px solid #eee; }
-
-h2{ margin:12px 0; font-size:20px; color:var(--eon-purple); }
-ul{ padding-left:18px; margin:8px 0 0 0; }
-li{ margin-bottom:10px; line-height:1.45; }
-
-@media (max-width: 900px){
-  body{ padding:18px; }
-  .container{ grid-template-columns:1fr; }
-}
-</style>
-</head>
-
-<body>
 
 <h1>REBO Monthly meeting</h1>
 
+
 <div class="topbar">
+
   <div class="timer-column">
-    <div class="timer" id="timer">05:00</div>
-    <div class="timer-buttons">
-      <button onclick="startTimer(5)">5 min</button>
-      <button onclick="startTimer(10)">10 min</button>
-      <button onclick="startTimer(15)">15 min</button>
-      <button onclick="startTimer(20)">20 min</button>
-      <button onclick="startTimer(45)">45 min</button>
+
+    <div class="timer" id="monthlyTimer">
+      05:00
     </div>
+
+    <div class="timer-buttons">
+
+      <button onclick="startMonthlyTimer(5)">
+        5 min
+      </button>
+
+      <button onclick="startMonthlyTimer(10)">
+        10 min
+      </button>
+
+      <button onclick="startMonthlyTimer(15)">
+        15 min
+      </button>
+
+      <button onclick="startMonthlyTimer(20)">
+        20 min
+      </button>
+
+      <button onclick="startMonthlyTimer(45)">
+        45 min
+      </button>
+
+    </div>
+
   </div>
 
+
   <div class="rolebox">
+
     <div class="roleline">
-      <div class="rolelabel">Moderator:</div>
-      <div class="rolename">Manager</div>
+
+      <div class="rolelabel">
+        Moderator:
+      </div>
+
+      <div class="rolename">
+        Manager
+      </div>
+
     </div>
+
+
     <div class="roleline">
-      <div class="rolelabel">Timekeeper:</div>
-      <div class="rolename">Månadens inspiratör</div>
+
+      <div class="rolelabel">
+        Timekeeper:
+      </div>
+
+      <div class="rolename">
+        Månadens inspiratör
+      </div>
+
     </div>
+
   </div>
+
 </div>
+
+
 
 <div class="container">
 
-  <!-- LEFT -->
+
+  <!-- MONTHLY LEFT -->
   <div class="card">
-    <div class="clock" id="monthlyClock">--:--</div>
+
+
+    <!-- CLOCK - SAME AS WEEKLY -->
+    <div
+      class="clock"
+      id="monthlyClock"
+    >
+      --:--
+    </div>
+
 
     <h2>Agenda</h2>
 
+
     <table>
+
       <tr>
+
         <th>#</th>
+
         <th>Time</th>
+
         <th>Person</th>
+
         <th>Agenda</th>
+
       </tr>
 
+
       <tr>
+
         <td>1</td>
+
         <td>10 min</td>
+
         <td>Moderator</td>
+
         <td>Check-in</td>
+
       </tr>
 
+
       <tr>
+
         <td>2</td>
+
         <td>15 min</td>
+
         <td>Alla</td>
+
         <td>Spotlight round</td>
+
       </tr>
 
+
       <tr>
+
         <td>3</td>
+
         <td>45 min</td>
+
         <td>Roterande</td>
-        <td>REBO fokus – Månadens deep dive</td>
+
+        <td>
+          REBO fokus – Månadens deep dive
+        </td>
+
       </tr>
 
+
       <tr>
+
         <td>4</td>
+
         <td>5 min</td>
+
         <td>Alla</td>
+
         <td>Paus</td>
+
       </tr>
 
+
       <tr>
+
         <td>5</td>
+
         <td>15 min</td>
+
         <td>Manager</td>
-        <td>Lindas insikter och reflektioner</td>
+
+        <td>
+          Lindas insikter och reflektioner
+        </td>
+
       </tr>
 
+
       <tr>
+
         <td>6</td>
+
         <td>20 min</td>
+
         <td>Roterande</td>
-        <td>Månadens inspiration</td>
+
+        <td>
+          Månadens inspiration
+        </td>
+
       </tr>
 
+
       <tr>
+
         <td>7</td>
+
         <td>10 min</td>
+
         <td>Timekeeper</td>
-        <td>Actions framåt</td>
+
+        <td>
+          Actions framåt
+        </td>
+
       </tr>
+
     </table>
+
   </div>
 
-  <!-- RIGHT -->
+
+
+  <!-- MONTHLY RIGHT -->
   <div class="card">
+
     <h2>REBO Guidelines</h2>
+
     <ul>
-      <li>Kom förberedd – Läs i förväg</li>
-      <li>Äg ditt område – Alla bidrar med frågor och insikter</li>
-      <li>Håll tiden – Kort, skarpt, poängen först</li>
-      <li>Prioritera – Vi lyfter bara det som verkligen är viktigt</li>
-      <li>Ett ämne i taget – Lyssna fullt ut</li>
-      <li>Aktivt deltagande från alla – REBO är allas forum: bidra, utmana, dela</li>
-      <li>Alltid lösningsfokuserade</li>
-      <li>Inspirera aktivt</li>
-      <li>Dokumentera direkt i planner</li>
-      <li>Vi avslutar med actions – Alla lämnar mötet med tydliga nästa steg</li>
+
+      <li>
+        Kom förberedd – Läs i förväg
+      </li>
+
+      <li>
+        Äg ditt område – Alla bidrar med frågor och insikter
+      </li>
+
+      <li>
+        Håll tiden – Kort, skarpt, poängen först
+      </li>
+
+      <li>
+        Prioritera – Vi lyfter bara det som verkligen är viktigt
+      </li>
+
+      <li>
+        Ett ämne i taget – Lyssna fullt ut
+      </li>
+
+      <li>
+        Aktivt deltagande från alla – REBO är allas forum: bidra, utmana, dela
+      </li>
+
+      <li>
+        Alltid lösningsfokuserade
+      </li>
+
+      <li>
+        Inspirera aktivt
+      </li>
+
+      <li>
+        Dokumentera direkt i planner
+      </li>
+
+      <li>
+        Vi avslutar med actions – Alla lämnar mötet med tydliga nästa steg
+      </li>
+
     </ul>
+
   </div>
 
 </div>
 
+
+
 <script>
-function updateClock(){
-  const now = new Date().toLocaleTimeString("sv-SE", {
-    timeZone: "Europe/Stockholm",
-    hour: "2-digit",
-    minute: "2-digit"
-  });
-  document.getElementById("monthlyClock").innerText = now;
+
+/* =========================
+   MONTHLY STOCKHOLM CLOCK
+   Same appearance and time
+   as Weekly
+========================= */
+
+function updateMonthlyClock(){
+
+  const now =
+    new Date()
+      .toLocaleTimeString(
+        "sv-SE",
+        {
+
+          timeZone:
+            "Europe/Stockholm",
+
+          hour:
+            "2-digit",
+
+          minute:
+            "2-digit"
+
+        }
+      );
+
+
+  document
+    .getElementById(
+      "monthlyClock"
+    )
+    .innerText =
+    now;
+
 }
-updateClock();
-setInterval(updateClock, 1000);
 
-let timerInterval;
-function startTimer(minutes){
-  clearInterval(timerInterval);
-  let seconds = minutes * 60;
 
-  function render(){
-    const min = String(Math.floor(seconds / 60)).padStart(2, "0");
-    const sec = String(seconds % 60).padStart(2, "0");
-    document.getElementById("timer").innerText = `${min}:${sec}`;
+updateMonthlyClock();
+
+
+setInterval(
+  updateMonthlyClock,
+  1000
+);
+
+
+/* =========================
+   MONTHLY TIMER
+========================= */
+
+let monthlyTimerInterval;
+
+
+function startMonthlyTimer(minutes){
+
+  clearInterval(
+    monthlyTimerInterval
+  );
+
+
+  let seconds =
+    minutes * 60;
+
+
+  function renderMonthlyTimer(){
+
+    const min =
+      String(
+        Math.floor(
+          seconds / 60
+        )
+      )
+      .padStart(
+        2,
+        "0"
+      );
+
+
+    const sec =
+      String(
+        seconds % 60
+      )
+      .padStart(
+        2,
+        "0"
+      );
+
+
+    document
+      .getElementById(
+        "monthlyTimer"
+      )
+      .innerText =
+      `${min}:${sec}`;
+
   }
 
-  render();
-  timerInterval = setInterval(() => {
-    seconds--;
-    if(seconds < 0) clearInterval(timerInterval);
-    render();
-  }, 1000);
+
+  renderMonthlyTimer();
+
+
+  monthlyTimerInterval =
+    setInterval(
+      () => {
+
+        seconds--;
+
+
+        if(seconds < 0){
+
+          clearInterval(
+            monthlyTimerInterval
+          );
+
+          return;
+
+        }
+
+
+        renderMonthlyTimer();
+
+      },
+      1000
+    );
+
 }
+
 </script>
-
-</body>
-
 
 </div>
 
+
+
+<!-- =========================
+     TAB SWITCHING
+========================= -->
+
 <script>
-function showTab(tabId) {
 
-    document.querySelectorAll('.content-section')
-        .forEach(section => {
-            section.classList.remove('active');
-        });
+function showTab(tabId){
 
-    document.querySelectorAll('.tab-button')
-        .forEach(button => {
-            button.classList.remove('active');
-        });
+  document
+    .querySelectorAll(
+      ".content-section"
+    )
+    .forEach(
+      section => {
 
-    document.getElementById(tabId)
-        .classList.add('active');
+        section
+          .classList
+          .remove(
+            "active"
+          );
 
-    event.target.classList.add('active');
+      }
+    );
+
+
+  document
+    .querySelectorAll(
+      ".tab-button"
+    )
+    .forEach(
+      button => {
+
+        button
+          .classList
+          .remove(
+            "active"
+          );
+
+      }
+    );
+
+
+  document
+    .getElementById(
+      tabId
+    )
+    .classList
+    .add(
+      "active"
+    );
+
+
+  event
+    .target
+    .classList
+    .add(
+      "active"
+    );
+
 }
+
 </script>
 
 </body>
