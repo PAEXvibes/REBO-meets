@@ -1,1152 +1,1372 @@
 <!DOCTYPE html>
 <html lang="sv">
+
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
 <title>REBO Meetings</title>
 
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background: #f5f5f5;
-    }
 
-    .button-container {
-        text-align: center;
-        margin-bottom: 20px;
-    }
+/* =========================
+   COLORS & GENERAL
+========================= */
 
-    .tab-button {
-        background-color: #E30613;
-        color: white;
-        border: none;
-        padding: 12px 24px;
-        margin: 0 5px;
-        border-radius: 5px;
-        cursor: pointer;
-        font-size: 16px;
-    }
-
-    .tab-button.active {
-        background-color: #6F2C91;
-    }
-
-    .content-section {
-        display: none;
-        background: white;
-        padding: 20px;
-        border-radius: 10px;
-    }
-
-    .content-section.active {
-        display: block;
-    }
-</style>
-</head>
-
-<body>
-
-<div class="button-container">
-    <button class="tab-button active" onclick="showTab('weekly')">
-        Weekly
-    </button>
-
-    <button class="tab-button" onclick="showTab('monthly')">
-        Monthly
-    </button>
-</div>
-
-<!-- WEEKLY -->
-<div id="weekly" class="content-section active">
-
-<style>
 :root{
-  --eon-red:#e6001a;
-  --eon-purple:#7a1f8a;
-  --gradient: linear-gradient(135deg, var(--eon-red), var(--eon-purple));
+    --eon-red:#e6001a;
+    --eon-purple:#7a1f8a;
+    --gradient:linear-gradient(
+        135deg,
+        var(--eon-red),
+        var(--eon-purple)
+    );
 
-  --bg:#f6f5f8;
-  --card:#ffffff;
-  --text:#2b2b2b;
-  --shadow:0 10px 22px rgba(0,0,0,0.08);
-  --radius:20px;
+    --bg:#f6f5f8;
+    --card:#ffffff;
+    --text:#2b2b2b;
+    --shadow:0 10px 22px rgba(0,0,0,0.08);
+    --radius:20px;
 }
 
 *{
-  box-sizing:border-box;
-  font-family:"Segoe UI",Arial,sans-serif;
+    box-sizing:border-box;
+    font-family:"Segoe UI",Arial,sans-serif;
 }
+
+body{
+    margin:0;
+    padding:28px;
+    background:var(--bg);
+    color:var(--text);
+}
+
+
+/* =========================
+   TABS
+========================= */
+
+.button-container{
+    text-align:center;
+    margin-bottom:20px;
+}
+
+.tab-button{
+    background-color:#E30613;
+    color:white;
+    border:none;
+    padding:12px 24px;
+    margin:0 5px;
+    border-radius:5px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+.tab-button.active{
+    background-color:#6F2C91;
+}
+
+.content-section{
+    display:none;
+    background:white;
+    padding:20px;
+    border-radius:10px;
+}
+
+.content-section.active{
+    display:block;
+}
+
+
+/* =========================
+   HEADINGS
+========================= */
 
 h1{
-  text-align:center;
-  font-size:38px;
-  margin:0 0 18px 0;
+    text-align:center;
+    font-size:38px;
+    margin:0 0 18px 0;
 }
 
-/* TOP: timer + role box */
-.topbar{
-  display:flex;
-  justify-content:center;
-  align-items:flex-start;
-  gap:14px;
-  flex-wrap:wrap;
-  margin-bottom:26px;
+h2{
+    margin:12px 0;
+    font-size:20px;
+    color:var(--eon-purple);
 }
+
+
+/* =========================
+   TOP AREA
+========================= */
+
+.topbar{
+    display:flex;
+    justify-content:center;
+    align-items:flex-start;
+    gap:14px;
+    flex-wrap:wrap;
+    margin-bottom:26px;
+}
+
+
+/* =========================
+   TIMER
+========================= */
 
 .timer-column{
-  text-align:center;
+    text-align:center;
 }
 
 .timer{
-  font-size:28px;
-  font-weight:700;
-  padding:10px 22px;
-  border-radius:14px;
-  background:var(--gradient);
-  color:#fff;
-  display:inline-block;
-  box-shadow:var(--shadow);
-  min-width:120px;
+    font-size:28px;
+    font-weight:700;
+    padding:10px 22px;
+    border-radius:14px;
+    background:var(--gradient);
+    color:#fff;
+    display:inline-block;
+    box-shadow:var(--shadow);
+    min-width:120px;
 }
 
 .timer-buttons{
-  margin-top:10px;
+    margin-top:10px;
 }
 
 .timer-buttons button{
-  margin:0 6px;
-  padding:6px 14px;
-  font-size:14px;
-  border-radius:999px;
-  border:none;
-  background:#fff;
-  cursor:pointer;
-  box-shadow:var(--shadow);
+    margin:0 6px;
+    padding:6px 14px;
+    font-size:14px;
+    border-radius:999px;
+    border:none;
+    background:#fff;
+    cursor:pointer;
+    box-shadow:var(--shadow);
 }
 
+
+/* =========================
+   MODERATOR / TIMEKEEPER
+========================= */
+
 .rolebox{
-  min-width:210px;
-  background:#fff;
-  border-radius:16px;
-  box-shadow:var(--shadow);
-  border:1px solid rgba(0,0,0,0.04);
-  padding:10px 12px;
-  position:relative;
+    background:#fff;
+    border-radius:16px;
+    box-shadow:var(--shadow);
+    border:1px solid rgba(0,0,0,0.04);
+    padding:10px 12px;
+    position:relative;
 }
 
 .rolebox::before{
-  content:"";
-  position:absolute;
-  inset:-2px;
-  border-radius:18px;
-  background:var(--gradient);
-  z-index:-1;
+    content:"";
+    position:absolute;
+    inset:-2px;
+    border-radius:18px;
+    background:var(--gradient);
+    z-index:-1;
+}
+
+.dual-rolebox{
+    min-width:440px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:0;
+}
+
+.roleperiod{
+    padding:0 12px;
+}
+
+.roleperiod:first-child{
+    border-right:1px solid #e7e2ea;
+}
+
+.roleperiod-title{
+    font-size:12px;
+    font-weight:800;
+    color:var(--eon-red);
+    text-transform:uppercase;
+    letter-spacing:.4px;
+    margin:0 0 4px 2px;
 }
 
 .roleline{
-  display:flex;
-  justify-content:space-between;
-  gap:10px;
-  padding:4px 2px;
-  font-size:14px;
+    display:flex;
+    justify-content:space-between;
+    gap:14px;
+    padding:4px 2px;
+    font-size:14px;
 }
 
 .rolelabel{
-  font-weight:700;
-  color:var(--eon-purple);
+    font-weight:700;
+    color:var(--eon-purple);
 }
 
 .rolename{
-  font-weight:700;
-  color:var(--text);
+    font-weight:700;
+    color:var(--text);
 }
 
-/* Weekly role box: this week + next week side by side */
-#weekly .weekly-rolebox{
-  min-width:440px;
-  display:grid;
-  grid-template-columns:1fr 1fr;
-  gap:0;
-  padding:10px 12px;
-}
 
-#weekly .roleweek{
-  padding:0 12px;
-}
+/* =========================
+   PAGE LAYOUT
+========================= */
 
-#weekly .roleweek:first-child{
-  border-right:1px solid #e7e2ea;
-}
-
-#weekly .roleweek-title{
-  font-size:12px;
-  font-weight:800;
-  color:var(--eon-red);
-  text-transform:uppercase;
-  letter-spacing:.4px;
-  margin:0 0 4px 2px;
-}
-
-/* LAYOUT */
 .container{
-  display:grid;
-  grid-template-columns:1.4fr 1fr;
-  gap:22px;
+    display:grid;
+    grid-template-columns:1.4fr 1fr;
+    gap:22px;
 }
 
-/* CARDS */
 .card{
-  background:var(--card);
-  border-radius:var(--radius);
-  padding:20px 22px;
-  box-shadow:var(--shadow);
+    background:var(--card);
+    border-radius:var(--radius);
+    padding:20px 22px;
+    box-shadow:var(--shadow);
 }
 
-/* CLOCK */
+
+/* =========================
+   CLOCK
+========================= */
+
 .clock{
-  font-size:34px;
-  font-weight:750;
-  padding:10px 18px;
-  border-radius:16px;
-  background:var(--gradient);
-  color:#fff;
-  display:inline-block;
-  margin-bottom:14px;
+    font-size:34px;
+    font-weight:750;
+    padding:10px 18px;
+    border-radius:16px;
+    background:var(--gradient);
+    color:#fff;
+    display:inline-block;
+    margin-bottom:14px;
 }
 
-/* TABLE */
+
+/* =========================
+   TABLE
+========================= */
+
 table{
-  width:100%;
-  border-collapse:collapse;
+    width:100%;
+    border-collapse:collapse;
 }
 
 th{
-  text-align:left;
-  padding-bottom:10px;
-  font-size:15px;
+    text-align:left;
+    padding-bottom:10px;
+    font-size:15px;
 }
 
 td{
-  padding:8px 6px;
-  vertical-align:top;
+    padding:8px 6px;
+    vertical-align:top;
 }
 
 tr:not(:last-child) td{
-  border-bottom:1px solid #eee;
+    border-bottom:1px solid #eee;
 }
 
-/* Agenda details */
+
+/* =========================
+   WEEKLY AGENDA DETAILS
+========================= */
+
 .agenda-details{
-  margin-top:8px;
-  font-size:14px;
-  line-height:1.5;
+    margin-top:8px;
+    font-size:14px;
+    line-height:1.5;
 }
 
 .agenda-details span{
-  display:block;
-  margin-top:4px;
+    display:block;
+    margin-top:4px;
 }
 
 .bold{
-  font-weight:800;
-  color:var(--eon-red);
+    font-weight:800;
+    color:var(--eon-red);
 }
 
-/* Info tooltip */
+
+/* =========================
+   INFO TOOLTIP
+========================= */
+
 .info{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  width:20px;
-  height:20px;
-  border-radius:999px;
-  margin-left:8px;
-  background:var(--gradient);
-  color:#fff;
-  font-size:13px;
-  font-weight:800;
-  cursor:default;
-  vertical-align:middle;
+    position:relative;
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    width:20px;
+    height:20px;
+    border-radius:999px;
+    margin-left:8px;
+    background:var(--gradient);
+    color:#fff;
+    font-size:13px;
+    font-weight:800;
+    cursor:default;
+    vertical-align:middle;
 }
 
 .info img{
-  position:absolute;
-  top:26px;
-  left:0;
-  width:624px;
-  max-width:min(80vw, 624px);
-  border-radius:12px;
-  box-shadow:var(--shadow);
-  display:none;
-  z-index:50;
-  background:#fff;
+    position:absolute;
+    top:26px;
+    left:0;
+    width:624px;
+    max-width:min(80vw,624px);
+    border-radius:12px;
+    box-shadow:var(--shadow);
+    display:none;
+    z-index:50;
+    background:#fff;
 }
 
 .info:hover img{
-  display:block;
+    display:block;
 }
 
-/* HEADLINES + guidelines */
-h2{
-  margin:12px 0;
-  font-size:20px;
-  color:var(--eon-purple);
-}
+
+/* =========================
+   GUIDELINES
+========================= */
 
 ul{
-  padding-left:18px;
-  margin:8px 0 0 0;
+    padding-left:18px;
+    margin:8px 0 0 0;
 }
 
 li{
-  margin-bottom:10px;
-  line-height:1.45;
+    margin-bottom:10px;
+    line-height:1.45;
 }
 
-@media (max-width: 900px){
-  .container{
-    grid-template-columns:1fr;
-  }
-
-  .rolebox{
-    width:min(420px, 92vw);
-  }
-
-  #weekly .weekly-rolebox{
-    min-width:0;
-    width:min(420px, 92vw);
-    grid-template-columns:1fr;
-  }
-
-  #weekly .roleweek{
-    padding:6px 4px;
-  }
-
-  #weekly .roleweek:first-child{
-    border-right:none;
-    border-bottom:1px solid #e7e2ea;
-    padding-bottom:10px;
-    margin-bottom:4px;
-  }
+.actions-box{
+    margin-top:18px;
 }
+
+
+/* =========================
+   MOBILE
+========================= */
+
+@media(max-width:900px){
+
+    body{
+        padding:18px;
+    }
+
+    .container{
+        grid-template-columns:1fr;
+    }
+
+    .dual-rolebox{
+        min-width:0;
+        width:min(420px,92vw);
+        grid-template-columns:1fr;
+    }
+
+    .roleperiod{
+        padding:6px 4px;
+    }
+
+    .roleperiod:first-child{
+        border-right:none;
+        border-bottom:1px solid #e7e2ea;
+        padding-bottom:10px;
+        margin-bottom:4px;
+    }
+
+}
+
 </style>
+
+</head>
+
+
+<body>
+
+
+<!-- =====================================================
+     TABS
+===================================================== -->
+
+<div class="button-container">
+
+    <button
+        class="tab-button active"
+        onclick="showTab('weekly',this)"
+    >
+        Weekly
+    </button>
+
+    <button
+        class="tab-button"
+        onclick="showTab('monthly',this)"
+    >
+        Monthly
+    </button>
+
+</div>
+
+
+
+<!-- =====================================================
+     WEEKLY
+===================================================== -->
+
+<div id="weekly" class="content-section active">
 
 <h1>REBO Weekly meeting</h1>
 
+
 <div class="topbar">
 
-  <div class="timer-column">
-    <div class="timer" id="timer">05:00</div>
 
-    <div class="timer-buttons">
-      <button type="button" onclick="startTimer(5)">5 min</button>
-      <button type="button" onclick="startTimer(15)">15 min</button>
-    </div>
-  </div>
+    <!-- WEEKLY TIMER -->
 
-  <div class="rolebox weekly-rolebox" aria-label="Roles">
+    <div class="timer-column">
 
-    <div class="roleweek">
+        <div
+            class="timer"
+            id="weeklyTimer"
+        >
+            05:00
+        </div>
 
-      <div class="roleweek-title" id="currentWeekLabel">
-        This week
-      </div>
+        <div class="timer-buttons">
 
-      <div class="roleline">
-        <div class="rolelabel">Moderator:</div>
-        <div class="rolename" id="roleModerator">–</div>
-      </div>
+            <button
+                type="button"
+                onclick="startWeeklyTimer(5)"
+            >
+                5 min
+            </button>
 
-      <div class="roleline">
-        <div class="rolelabel">Timekeeper:</div>
-        <div class="rolename" id="roleTimekeeper">–</div>
-      </div>
+            <button
+                type="button"
+                onclick="startWeeklyTimer(15)"
+            >
+                15 min
+            </button>
 
-    </div>
-
-    <div class="roleweek">
-
-      <div class="roleweek-title" id="nextWeekLabel">
-        Next week
-      </div>
-
-      <div class="roleline">
-        <div class="rolelabel">Moderator:</div>
-        <div class="rolename" id="nextRoleModerator">–</div>
-      </div>
-
-      <div class="roleline">
-        <div class="rolelabel">Timekeeper:</div>
-        <div class="rolename" id="nextRoleTimekeeper">–</div>
-      </div>
+        </div>
 
     </div>
 
-  </div>
+
+
+    <!-- WEEKLY ROLES -->
+
+    <div
+        class="rolebox dual-rolebox"
+        aria-label="Weekly roles"
+    >
+
+
+        <!-- THIS WEEK -->
+
+        <div class="roleperiod">
+
+            <div
+                class="roleperiod-title"
+                id="weeklyCurrentLabel"
+            >
+                This week
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Moderator:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="weeklyModerator"
+                >
+                    –
+                </div>
+
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Timekeeper:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="weeklyTimekeeper"
+                >
+                    –
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NEXT WEEK -->
+
+        <div class="roleperiod">
+
+            <div
+                class="roleperiod-title"
+                id="weeklyNextLabel"
+            >
+                Next week
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Moderator:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="weeklyNextModerator"
+                >
+                    –
+                </div>
+
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Timekeeper:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="weeklyNextTimekeeper"
+                >
+                    –
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </div>
 
+
+
+<!-- WEEKLY CONTENT -->
 
 <div class="container">
 
-  <!-- LEFT: CLOCK + AGENDA -->
-  <div class="card">
 
-    <div class="clock" id="clock">--:--</div>
+    <!-- LEFT -->
 
-    <h2>Agenda</h2>
+    <div class="card">
 
-    <table>
-
-      <tr>
-        <th style="width:52px;">#</th>
-        <th style="width:86px;">Time</th>
-        <th style="width:150px;">Person</th>
-        <th>Agenda</th>
-      </tr>
-
-      <tr>
-        <td>1</td>
-        <td>8.15</td>
-        <td>Moderator</td>
-
-        <td>
-
-          Team success
-
-          <span class="info" title="Team Success info">
-            i
-            <img src="team-success.png" alt="Team Success" />
-          </span>
-
-          <div class="agenda-details" id="mondays">
-
-            <span>1st Monday: Gratitude circle</span>
-
-            <span>2nd Monday: Acknowledge others</span>
-
-            <span>3rd Monday: Be proud in a short sentence</span>
-
-            <span>
-              4th Monday: What have you learned lately in a short sentence
-            </span>
-
-          </div>
-
-        </td>
-
-      </tr>
+        <div
+            class="clock"
+            id="weeklyClock"
+        >
+            --:--
+        </div>
 
 
-      <tr>
-        <td>2</td>
-        <td>8.20</td>
-        <td>Manager</td>
-        <td>Management update</td>
-      </tr>
+        <h2>Agenda</h2>
 
 
-      <tr>
-        <td>3</td>
-        <td>8.25</td>
-        <td>All</td>
-        <td>Update, highlights, problem, help</td>
-      </tr>
+        <table>
+
+            <tr>
+
+                <th style="width:52px;">
+                    #
+                </th>
+
+                <th style="width:86px;">
+                    Time
+                </th>
+
+                <th style="width:150px;">
+                    Person
+                </th>
+
+                <th>
+                    Agenda
+                </th>
+
+            </tr>
 
 
-      <tr>
-        <td>4</td>
-        <td>8.40</td>
-        <td>Moderator</td>
-        <td>Allocating recruitments</td>
-      </tr>
+
+            <tr>
+
+                <td>1</td>
+
+                <td>8.15</td>
+
+                <td>Moderator</td>
+
+                <td>
+
+                    Team success
+
+                    <span
+                        class="info"
+                        title="Team Success info"
+                    >
+                        i
+
+                        <img
+                            src="team-success.png"
+                            alt="Team Success"
+                        >
+
+                    </span>
 
 
-      <tr>
-        <td>5</td>
-        <td>8.45</td>
-        <td>Timekeeper</td>
-        <td>Actions forward</td>
-      </tr>
+                    <div
+                        class="agenda-details"
+                        id="mondays"
+                    >
+
+                        <span>
+                            1st Monday: Gratitude circle
+                        </span>
+
+                        <span>
+                            2nd Monday: Acknowledge others
+                        </span>
+
+                        <span>
+                            3rd Monday: Be proud in a short sentence
+                        </span>
+
+                        <span>
+                            4th Monday: What have you learned lately in a short sentence
+                        </span>
+
+                    </div>
+
+                </td>
+
+            </tr>
 
 
-      <tr>
-        <td>6</td>
-        <td>8.50</td>
-        <td>All</td>
-        <td>Feedback meeting</td>
-      </tr>
 
-    </table>
+            <tr>
 
-  </div>
+                <td>2</td>
 
+                <td>8.20</td>
 
-  <!-- RIGHT: GUIDELINES -->
-  <div class="card">
+                <td>Manager</td>
 
-    <h2>REBO Guidelines</h2>
+                <td>
+                    Management update
+                </td>
 
-    <ul>
-
-      <li>We start and end in time</li>
-
-      <li>We come prepared to the meeting</li>
-
-      <li>There will always be a moderator and timekeeper</li>
-
-      <li>
-        If you are not present, hand over the information to someone else
-      </li>
-
-      <li>We act with good intentions</li>
-
-      <li>We listen to each other</li>
-
-      <li>We help each other and offer support</li>
-
-      <li>We dare to tell our thoughts</li>
-
-      <li>We give constructive feedback</li>
-
-      <li>We give sensitive feedback in JF</li>
-
-    </ul>
+            </tr>
 
 
-    <div class="actions-box">
 
-      <a
-        href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a"
-        target="_blank"
-        rel="noopener"
-      >
-        ✅ Actions – REBO Planner
-      </a>
+            <tr>
+
+                <td>3</td>
+
+                <td>8.25</td>
+
+                <td>All</td>
+
+                <td>
+                    Update, highlights, problem, help
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>4</td>
+
+                <td>8.40</td>
+
+                <td>Moderator</td>
+
+                <td>
+                    Allocating recruitments
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>5</td>
+
+                <td>8.45</td>
+
+                <td>Timekeeper</td>
+
+                <td>
+                    Actions forward
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>6</td>
+
+                <td>8.50</td>
+
+                <td>All</td>
+
+                <td>
+                    Feedback meeting
+                </td>
+
+            </tr>
+
+        </table>
 
     </div>
 
-  </div>
+
+
+    <!-- RIGHT -->
+
+    <div class="card">
+
+        <h2>
+            REBO Guidelines
+        </h2>
+
+        <ul>
+
+            <li>
+                We start and end in time
+            </li>
+
+            <li>
+                We come prepared to the meeting
+            </li>
+
+            <li>
+                There will always be a moderator and timekeeper
+            </li>
+
+            <li>
+                If you are not present, hand over the information to someone else
+            </li>
+
+            <li>
+                We act with good intentions
+            </li>
+
+            <li>
+                We listen to each other
+            </li>
+
+            <li>
+                We help each other and offer support
+            </li>
+
+            <li>
+                We dare to tell our thoughts
+            </li>
+
+            <li>
+                We give constructive feedback
+            </li>
+
+            <li>
+                We give sensitive feedback in JF
+            </li>
+
+        </ul>
+
+
+        <div class="actions-box">
+
+            <a
+                href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a"
+                target="_blank"
+                rel="noopener"
+            >
+                ✅ Actions – REBO Planner
+            </a>
+
+        </div>
+
+    </div>
+
 
 </div>
-
-
-<script>
-
-/* =========================
-   WEEKLY STOCKHOLM CLOCK
-========================= */
-
-function updateClock(){
-
-  const now = new Date().toLocaleTimeString("sv-SE", {
-
-    timeZone: "Europe/Stockholm",
-
-    hour: "2-digit",
-
-    minute: "2-digit"
-
-  });
-
-  document.getElementById("clock").innerText = now;
-
-}
-
-updateClock();
-
-setInterval(updateClock,1000);
-
-
-/* =========================
-   WEEKLY COUNTDOWN TIMER
-========================= */
-
-let timerInterval;
-
-function startTimer(minutes){
-
-  clearInterval(timerInterval);
-
-  let seconds = minutes * 60;
-
-  function render(){
-
-    const min =
-      String(Math.floor(seconds / 60)).padStart(2,"0");
-
-    const sec =
-      String(seconds % 60).padStart(2,"0");
-
-    document.getElementById("timer").innerText =
-      `${min}:${sec}`;
-
-  }
-
-  render();
-
-  timerInterval = setInterval(() => {
-
-    seconds -= 1;
-
-    if(seconds < 0){
-
-      clearInterval(timerInterval);
-
-      return;
-
-    }
-
-    render();
-
-  },1000);
-
-}
-
-
-/* =========================
-   ISO WEEK NUMBER
-========================= */
-
-function getISOWeek(date){
-
-  const d = new Date(date);
-
-  d.setHours(0,0,0,0);
-
-  d.setDate(
-    d.getDate() +
-    3 -
-    (d.getDay()+6)%7
-  );
-
-  const week1 =
-    new Date(d.getFullYear(),0,4);
-
-  return 1 + Math.round(
-
-    (
-      (d-week1)/86400000
-      -
-      3
-      +
-      (week1.getDay()+6)%7
-    ) / 7
-
-  );
-
-}
-
-
-const week =
-  getISOWeek(new Date());
-
-
-/* =========================
-   MONDAY ACTIVITY
-========================= */
-
-const mondayIndex =
-  ((week-14)%4+4)%4;
-
-const mondayLines =
-  document.querySelectorAll("#mondays span");
-
-if(mondayLines[mondayIndex]){
-
-  mondayLines[mondayIndex]
-    .classList.add("bold");
-
-}
-
-
-/* =========================
-   WEEKLY ROLE ROTATION
-
-   Josefin
-   Ellinor
-   Jonathan
-   Fredrik
-   Marvin
-   Linda
-   Julia
-   Anna
-========================= */
-
-const team = [
-
-  "Josefin",
-
-  "Ellinor",
-
-  "Jonathan",
-
-  "Fredrik",
-
-  "Marvin",
-
-  "Linda",
-
-  "Julia",
-
-  "Anna"
-
-];
-
-
-const baseModerator =
-  "Josefin";
-
-
-const rotationBaseMonday =
-  new Date(2026,7,17);
-
-
-function getMonday(date){
-
-  const d =
-    new Date(date);
-
-  d.setHours(0,0,0,0);
-
-  const day =
-    (d.getDay()+6)%7;
-
-  d.setDate(
-    d.getDate()-day
-  );
-
-  return d;
-
-}
-
-
-const currentMonday =
-  getMonday(new Date());
-
-
-const weeksFromBase =
-  Math.round(
-
-    (
-      currentMonday -
-      rotationBaseMonday
-    )
-    /
-    (
-      7 *
-      24 *
-      60 *
-      60 *
-      1000
-    )
-
-  );
-
-
-const baseModIndex =
-  team.indexOf(baseModerator);
-
-
-const modIndex =
-  (
-    (
-      baseModIndex +
-      weeksFromBase
-    )
-    %
-    team.length
-    +
-    team.length
-  )
-  %
-  team.length;
-
-
-const tkIndex =
-  (modIndex+1)
-  %
-  team.length;
-
-
-const nextModIndex =
-  tkIndex;
-
-
-const nextTkIndex =
-  (nextModIndex+1)
-  %
-  team.length;
-
-
-const nextWeekDate =
-  new Date(currentMonday);
-
-
-nextWeekDate.setDate(
-  nextWeekDate.getDate()+7
-);
-
-
-const nextWeek =
-  getISOWeek(nextWeekDate);
-
-
-document.getElementById("roleModerator")
-  .innerText =
-  team[modIndex];
-
-
-document.getElementById("roleTimekeeper")
-  .innerText =
-  team[tkIndex];
-
-
-document.getElementById("nextRoleModerator")
-  .innerText =
-  team[nextModIndex];
-
-
-document.getElementById("nextRoleTimekeeper")
-  .innerText =
-  team[nextTkIndex];
-
-
-document.getElementById("currentWeekLabel")
-  .innerText =
-  `This week · v${week}`;
-
-
-document.getElementById("nextWeekLabel")
-  .innerText =
-  `Next week · v${nextWeek}`;
-
-</script>
 
 </div>
 
 
 
-<!-- =========================
+<!-- =====================================================
      MONTHLY
-========================= -->
+===================================================== -->
 
 <div id="monthly" class="content-section">
-
 
 <h1>REBO Monthly meeting</h1>
 
 
 <div class="topbar">
 
-  <div class="timer-column">
 
-    <div class="timer" id="monthlyTimer">
-      05:00
-    </div>
+    <!-- MONTHLY TIMER -->
 
-    <div class="timer-buttons">
+    <div class="timer-column">
 
-      <button onclick="startMonthlyTimer(5)">
-        5 min
-      </button>
+        <div
+            class="timer"
+            id="monthlyTimer"
+        >
+            05:00
+        </div>
 
-      <button onclick="startMonthlyTimer(10)">
-        10 min
-      </button>
+        <div class="timer-buttons">
 
-      <button onclick="startMonthlyTimer(15)">
-        15 min
-      </button>
+            <button
+                type="button"
+                onclick="startMonthlyTimer(5)"
+            >
+                5 min
+            </button>
 
-      <button onclick="startMonthlyTimer(20)">
-        20 min
-      </button>
+            <button
+                type="button"
+                onclick="startMonthlyTimer(10)"
+            >
+                10 min
+            </button>
 
-      <button onclick="startMonthlyTimer(45)">
-        45 min
-      </button>
+            <button
+                type="button"
+                onclick="startMonthlyTimer(15)"
+            >
+                15 min
+            </button>
 
-    </div>
+            <button
+                type="button"
+                onclick="startMonthlyTimer(20)"
+            >
+                20 min
+            </button>
 
-  </div>
+            <button
+                type="button"
+                onclick="startMonthlyTimer(45)"
+            >
+                45 min
+            </button>
 
-
-  <div class="rolebox">
-
-    <div class="roleline">
-
-      <div class="rolelabel">
-        Moderator:
-      </div>
-
-      <div class="rolename">
-        Manager
-      </div>
-
-    </div>
-
-
-    <div class="roleline">
-
-      <div class="rolelabel">
-        Timekeeper:
-      </div>
-
-      <div class="rolename">
-        Månadens inspiratör
-      </div>
+        </div>
 
     </div>
 
-  </div>
+
+
+    <!-- MONTHLY ROLES -->
+
+    <div
+        class="rolebox dual-rolebox"
+        aria-label="Monthly roles"
+    >
+
+
+        <!-- THIS MONTH -->
+
+        <div class="roleperiod">
+
+            <div
+                class="roleperiod-title"
+                id="monthlyCurrentLabel"
+            >
+                This month
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Moderator:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="monthlyModerator"
+                >
+                    –
+                </div>
+
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Timekeeper:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="monthlyTimekeeper"
+                >
+                    –
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- NEXT MONTH -->
+
+        <div class="roleperiod">
+
+            <div
+                class="roleperiod-title"
+                id="monthlyNextLabel"
+            >
+                Next month
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Moderator:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="monthlyNextModerator"
+                >
+                    –
+                </div>
+
+            </div>
+
+            <div class="roleline">
+
+                <div class="rolelabel">
+                    Timekeeper:
+                </div>
+
+                <div
+                    class="rolename"
+                    id="monthlyNextTimekeeper"
+                >
+                    –
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
 
 </div>
 
 
+
+<!-- MONTHLY CONTENT -->
 
 <div class="container">
 
 
-  <!-- MONTHLY LEFT -->
-  <div class="card">
+    <!-- LEFT -->
+
+    <div class="card">
+
+        <div
+            class="clock"
+            id="monthlyClock"
+        >
+            --:--
+        </div>
 
 
-    <!-- CLOCK - SAME AS WEEKLY -->
-    <div
-      class="clock"
-      id="monthlyClock"
-    >
-      --:--
+        <h2>
+            Agenda
+        </h2>
+
+
+        <table>
+
+            <tr>
+
+                <th>
+                    #
+                </th>
+
+                <th>
+                    Time
+                </th>
+
+                <th>
+                    Person
+                </th>
+
+                <th>
+                    Agenda
+                </th>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>1</td>
+
+                <td>10 min</td>
+
+                <td>Moderator</td>
+
+                <td>
+                    Check-in
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>2</td>
+
+                <td>15 min</td>
+
+                <td>Alla</td>
+
+                <td>
+                    Spotlight round
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>3</td>
+
+                <td>45 min</td>
+
+                <td>Roterande</td>
+
+                <td>
+                    REBO fokus – Månadens deep dive
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>4</td>
+
+                <td>5 min</td>
+
+                <td>Alla</td>
+
+                <td>
+                    Paus
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>5</td>
+
+                <td>15 min</td>
+
+                <td>Manager</td>
+
+                <td>
+                    Lindas insikter och reflektioner
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>6</td>
+
+                <td>20 min</td>
+
+                <td>Roterande</td>
+
+                <td>
+                    Månadens inspiration
+                </td>
+
+            </tr>
+
+
+
+            <tr>
+
+                <td>7</td>
+
+                <td>10 min</td>
+
+                <td>Timekeeper</td>
+
+                <td>
+                    Actions framåt
+                </td>
+
+            </tr>
+
+        </table>
+
     </div>
 
 
-    <h2>Agenda</h2>
 
+    <!-- RIGHT -->
 
-    <table>
+    <div class="card">
 
-      <tr>
+        <h2>
+            REBO Guidelines
+        </h2>
 
-        <th>#</th>
+        <ul>
 
-        <th>Time</th>
+            <li>
+                Kom förberedd – Läs i förväg
+            </li>
 
-        <th>Person</th>
+            <li>
+                Äg ditt område – Alla bidrar med frågor och insikter
+            </li>
 
-        <th>Agenda</th>
+            <li>
+                Håll tiden – Kort, skarpt, poängen först
+            </li>
 
-      </tr>
+            <li>
+                Prioritera – Vi lyfter bara det som verkligen är viktigt
+            </li>
 
+            <li>
+                Ett ämne i taget – Lyssna fullt ut
+            </li>
 
-      <tr>
+            <li>
+                Aktivt deltagande från alla – REBO är allas forum: bidra, utmana, dela
+            </li>
 
-        <td>1</td>
+            <li>
+                Alltid lösningsfokuserade
+            </li>
 
-        <td>10 min</td>
+            <li>
+                Inspirera aktivt
+            </li>
 
-        <td>Moderator</td>
+            <li>
+                Dokumentera direkt i planner
+            </li>
 
-        <td>Check-in</td>
+            <li>
+                Vi avslutar med actions – Alla lämnar mötet med tydliga nästa steg
+            </li>
 
-      </tr>
+        </ul>
 
+    </div>
 
-      <tr>
 
-        <td>2</td>
-
-        <td>15 min</td>
-
-        <td>Alla</td>
-
-        <td>Spotlight round</td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>3</td>
-
-        <td>45 min</td>
-
-        <td>Roterande</td>
-
-        <td>
-          REBO fokus – Månadens deep dive
-        </td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>4</td>
-
-        <td>5 min</td>
-
-        <td>Alla</td>
-
-        <td>Paus</td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>5</td>
-
-        <td>15 min</td>
-
-        <td>Manager</td>
-
-        <td>
-          Lindas insikter och reflektioner
-        </td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>6</td>
-
-        <td>20 min</td>
-
-        <td>Roterande</td>
-
-        <td>
-          Månadens inspiration
-        </td>
-
-      </tr>
-
-
-      <tr>
-
-        <td>7</td>
-
-        <td>10 min</td>
-
-        <td>Timekeeper</td>
-
-        <td>
-          Actions framåt
-        </td>
-
-      </tr>
-
-    </table>
-
-  </div>
-
-
-
-  <!-- MONTHLY RIGHT -->
-  <div class="card">
-
-    <h2>REBO Guidelines</h2>
-
-    <ul>
-
-      <li>
-        Kom förberedd – Läs i förväg
-      </li>
-
-      <li>
-        Äg ditt område – Alla bidrar med frågor och insikter
-      </li>
-
-      <li>
-        Håll tiden – Kort, skarpt, poängen först
-      </li>
-
-      <li>
-        Prioritera – Vi lyfter bara det som verkligen är viktigt
-      </li>
-
-      <li>
-        Ett ämne i taget – Lyssna fullt ut
-      </li>
-
-      <li>
-        Aktivt deltagande från alla – REBO är allas forum: bidra, utmana, dela
-      </li>
-
-      <li>
-        Alltid lösningsfokuserade
-      </li>
-
-      <li>
-        Inspirera aktivt
-      </li>
-
-      <li>
-        Dokumentera direkt i planner
-      </li>
-
-      <li>
-        Vi avslutar med actions – Alla lämnar mötet med tydliga nästa steg
-      </li>
-
-    </ul>
-
-  </div>
+</div>
 
 </div>
 
 
 
+<!-- =====================================================
+     JAVASCRIPT
+===================================================== -->
+
 <script>
 
+
 /* =========================
-   MONTHLY STOCKHOLM CLOCK
-   Same appearance and time
-   as Weekly
+   TAB SWITCHING
 ========================= */
 
-function updateMonthlyClock(){
+function showTab(tabId,button){
 
-  const now =
-    new Date()
-      .toLocaleTimeString(
-        "sv-SE",
-        {
+    document
+        .querySelectorAll(".content-section")
+        .forEach(section=>{
 
-          timeZone:
-            "Europe/Stockholm",
+            section.classList.remove("active");
 
-          hour:
-            "2-digit",
-
-          minute:
-            "2-digit"
-
-        }
-      );
+        });
 
 
-  document
-    .getElementById(
-      "monthlyClock"
-    )
-    .innerText =
-    now;
+    document
+        .querySelectorAll(".tab-button")
+        .forEach(tabButton=>{
+
+            tabButton.classList.remove("active");
+
+        });
+
+
+    document
+        .getElementById(tabId)
+        .classList.add("active");
+
+
+    button.classList.add("active");
 
 }
 
 
-updateMonthlyClock();
+
+/* =========================
+   STOCKHOLM CLOCK
+========================= */
+
+function getStockholmTime(){
+
+    return new Date()
+        .toLocaleTimeString(
+            "sv-SE",
+            {
+                timeZone:"Europe/Stockholm",
+                hour:"2-digit",
+                minute:"2-digit"
+            }
+        );
+
+}
+
+
+function updateClocks(){
+
+    const time=
+        getStockholmTime();
+
+
+    document
+        .getElementById("weeklyClock")
+        .innerText=time;
+
+
+    document
+        .getElementById("monthlyClock")
+        .innerText=time;
+
+}
+
+
+updateClocks();
 
 
 setInterval(
-  updateMonthlyClock,
-  1000
+    updateClocks,
+    1000
 );
+
+
+
+/* =========================
+   WEEKLY TIMER
+========================= */
+
+let weeklyTimerInterval;
+
+
+function startWeeklyTimer(minutes){
+
+    clearInterval(
+        weeklyTimerInterval
+    );
+
+
+    let seconds=
+        minutes*60;
+
+
+    function renderWeeklyTimer(){
+
+        const min=
+            String(
+                Math.floor(seconds/60)
+            )
+            .padStart(2,"0");
+
+
+        const sec=
+            String(
+                seconds%60
+            )
+            .padStart(2,"0");
+
+
+        document
+            .getElementById("weeklyTimer")
+            .innerText=
+            `${min}:${sec}`;
+
+    }
+
+
+    renderWeeklyTimer();
+
+
+    weeklyTimerInterval=
+        setInterval(()=>{
+
+            seconds--;
+
+
+            if(seconds<0){
+
+                clearInterval(
+                    weeklyTimerInterval
+                );
+
+                return;
+
+            }
+
+
+            renderWeeklyTimer();
+
+        },1000);
+
+}
+
 
 
 /* =========================
@@ -1158,146 +1378,630 @@ let monthlyTimerInterval;
 
 function startMonthlyTimer(minutes){
 
-  clearInterval(
-    monthlyTimerInterval
-  );
+    clearInterval(
+        monthlyTimerInterval
+    );
 
 
-  let seconds =
-    minutes * 60;
+    let seconds=
+        minutes*60;
 
 
-  function renderMonthlyTimer(){
+    function renderMonthlyTimer(){
 
-    const min =
-      String(
-        Math.floor(
-          seconds / 60
+        const min=
+            String(
+                Math.floor(seconds/60)
+            )
+            .padStart(2,"0");
+
+
+        const sec=
+            String(
+                seconds%60
+            )
+            .padStart(2,"0");
+
+
+        document
+            .getElementById("monthlyTimer")
+            .innerText=
+            `${min}:${sec}`;
+
+    }
+
+
+    renderMonthlyTimer();
+
+
+    monthlyTimerInterval=
+        setInterval(()=>{
+
+            seconds--;
+
+
+            if(seconds<0){
+
+                clearInterval(
+                    monthlyTimerInterval
+                );
+
+                return;
+
+            }
+
+
+            renderMonthlyTimer();
+
+        },1000);
+
+}
+
+
+
+/* =====================================================
+   SEPARATE TEAM LISTS
+===================================================== */
+
+
+/* WEEKLY:
+   Sigrun is NOT included
+*/
+
+const weeklyTeam=[
+
+    "Josefin",
+
+    "Ellinor",
+
+    "Jonathan",
+
+    "Fredrik",
+
+    "Marvin",
+
+    "Linda",
+
+    "Julia",
+
+    "Anna"
+
+];
+
+
+
+/* MONTHLY:
+   Sigrun IS included
+*/
+
+const monthlyTeam=[
+
+    "Josefin",
+
+    "Ellinor",
+
+    "Jonathan",
+
+    "Fredrik",
+
+    "Marvin",
+
+    "Linda",
+
+    "Julia",
+
+    "Anna",
+
+    "Sigrun"
+
+];
+
+
+
+/* =====================================================
+   ISO WEEK NUMBER
+===================================================== */
+
+function getISOWeek(date){
+
+    const d=
+        new Date(date);
+
+
+    d.setHours(
+        0,
+        0,
+        0,
+        0
+    );
+
+
+    d.setDate(
+        d.getDate()
+        +
+        3
+        -
+        (
+            d.getDay()+6
         )
-      )
-      .padStart(
-        2,
-        "0"
-      );
+        %
+        7
+    );
 
 
-    const sec =
-      String(
-        seconds % 60
-      )
-      .padStart(
-        2,
-        "0"
-      );
+    const week1=
+        new Date(
+            d.getFullYear(),
+            0,
+            4
+        );
 
 
-    document
-      .getElementById(
-        "monthlyTimer"
-      )
-      .innerText =
-      `${min}:${sec}`;
+    return 1+
+        Math.round(
 
-  }
+            (
+                (
+                    d-week1
+                )
+                /
+                86400000
+                -
+                3
+                +
+                (
+                    week1.getDay()+6
+                )
+                %
+                7
+            )
+            /
+            7
+
+        );
+
+}
 
 
-  renderMonthlyTimer();
+
+/* =====================================================
+   GET MONDAY
+===================================================== */
+
+function getMonday(date){
+
+    const d=
+        new Date(date);
 
 
-  monthlyTimerInterval =
-    setInterval(
-      () => {
+    d.setHours(
+        0,
+        0,
+        0,
+        0
+    );
 
-        seconds--;
+
+    const day=
+        (
+            d.getDay()+6
+        )
+        %
+        7;
 
 
-        if(seconds < 0){
+    d.setDate(
+        d.getDate()-day
+    );
 
-          clearInterval(
-            monthlyTimerInterval
-          );
 
-          return;
+    return d;
 
+}
+
+
+
+/* =====================================================
+   WEEKLY ROTATION
+   Changes every Monday
+===================================================== */
+
+
+/*
+   Starting point:
+
+   Week beginning
+   17 August 2026
+
+   Moderator = Josefin
+   Timekeeper = Ellinor
+*/
+
+const weeklyBaseMonday=
+    new Date(
+        2026,
+        7,
+        17
+    );
+
+
+const currentMonday=
+    getMonday(
+        new Date()
+    );
+
+
+const millisecondsPerWeek=
+    7
+    *
+    24
+    *
+    60
+    *
+    60
+    *
+    1000;
+
+
+const weeksFromBase=
+    Math.round(
+
+        (
+            currentMonday
+            -
+            weeklyBaseMonday
+        )
+        /
+        millisecondsPerWeek
+
+    );
+
+
+
+const weeklyModeratorIndex=
+    (
+        (
+            weeksFromBase
+            %
+            weeklyTeam.length
+        )
+        +
+        weeklyTeam.length
+    )
+    %
+    weeklyTeam.length;
+
+
+
+const weeklyTimekeeperIndex=
+    (
+        weeklyModeratorIndex+1
+    )
+    %
+    weeklyTeam.length;
+
+
+
+const weeklyNextModeratorIndex=
+    weeklyTimekeeperIndex;
+
+
+
+const weeklyNextTimekeeperIndex=
+    (
+        weeklyNextModeratorIndex+1
+    )
+    %
+    weeklyTeam.length;
+
+
+
+const currentWeek=
+    getISOWeek(
+        currentMonday
+    );
+
+
+
+const nextMonday=
+    new Date(
+        currentMonday
+    );
+
+
+nextMonday.setDate(
+    nextMonday.getDate()+7
+);
+
+
+
+const nextWeek=
+    getISOWeek(
+        nextMonday
+    );
+
+
+
+/* WEEKLY NAMES */
+
+document
+    .getElementById("weeklyModerator")
+    .innerText=
+    weeklyTeam[
+        weeklyModeratorIndex
+    ];
+
+
+document
+    .getElementById("weeklyTimekeeper")
+    .innerText=
+    weeklyTeam[
+        weeklyTimekeeperIndex
+    ];
+
+
+document
+    .getElementById("weeklyNextModerator")
+    .innerText=
+    weeklyTeam[
+        weeklyNextModeratorIndex
+    ];
+
+
+document
+    .getElementById("weeklyNextTimekeeper")
+    .innerText=
+    weeklyTeam[
+        weeklyNextTimekeeperIndex
+    ];
+
+
+
+/* WEEKLY LABELS */
+
+document
+    .getElementById("weeklyCurrentLabel")
+    .innerText=
+    `This week · v${currentWeek}`;
+
+
+document
+    .getElementById("weeklyNextLabel")
+    .innerText=
+    `Next week · v${nextWeek}`;
+
+
+
+/* =====================================================
+   WEEKLY MONDAY ACTIVITY
+===================================================== */
+
+const mondayIndex=
+    (
+        (
+            currentWeek-14
+        )
+        %
+        4
+        +
+        4
+    )
+    %
+    4;
+
+
+const mondayLines=
+    document.querySelectorAll(
+        "#mondays span"
+    );
+
+
+if(
+    mondayLines[
+        mondayIndex
+    ]
+){
+
+    mondayLines[
+        mondayIndex
+    ]
+    .classList
+    .add("bold");
+
+}
+
+
+
+/* =====================================================
+   MONTHLY ROTATION
+   Changes ONLY on the 1st of each month
+===================================================== */
+
+
+/*
+   Starting point:
+
+   August 2026
+
+   Moderator = Josefin
+   Timekeeper = Ellinor
+
+   Monthly team also includes Sigrun.
+*/
+
+const monthlyBaseYear=
+    2026;
+
+
+const monthlyBaseMonth=
+    7;
+/*
+   JavaScript months:
+   January = 0
+   August = 7
+*/
+
+
+const today=
+    new Date();
+
+
+const currentYear=
+    today.getFullYear();
+
+
+const currentMonth=
+    today.getMonth();
+
+
+
+/*
+   Calculate number of calendar months
+   since August 2026.
+*/
+
+const monthsFromBase=
+    (
+        currentYear*12
+        +
+        currentMonth
+    )
+    -
+    (
+        monthlyBaseYear*12
+        +
+        monthlyBaseMonth
+    );
+
+
+
+const monthlyModeratorIndex=
+    (
+        (
+            monthsFromBase
+            %
+            monthlyTeam.length
+        )
+        +
+        monthlyTeam.length
+    )
+    %
+    monthlyTeam.length;
+
+
+
+const monthlyTimekeeperIndex=
+    (
+        monthlyModeratorIndex+1
+    )
+    %
+    monthlyTeam.length;
+
+
+
+const monthlyNextModeratorIndex=
+    monthlyTimekeeperIndex;
+
+
+
+const monthlyNextTimekeeperIndex=
+    (
+        monthlyNextModeratorIndex+1
+    )
+    %
+    monthlyTeam.length;
+
+
+
+/* =========================
+   MONTH NAMES
+========================= */
+
+const currentMonthName=
+    today.toLocaleDateString(
+        "en-GB",
+        {
+            month:"long"
         }
-
-
-        renderMonthlyTimer();
-
-      },
-      1000
     );
 
-}
+
+
+const nextMonthDate=
+    new Date(
+        currentYear,
+        currentMonth+1,
+        1
+    );
+
+
+
+const nextMonthName=
+    nextMonthDate.toLocaleDateString(
+        "en-GB",
+        {
+            month:"long"
+        }
+    );
+
+
+
+/* =========================
+   MONTHLY NAMES
+========================= */
+
+document
+    .getElementById("monthlyModerator")
+    .innerText=
+    monthlyTeam[
+        monthlyModeratorIndex
+    ];
+
+
+document
+    .getElementById("monthlyTimekeeper")
+    .innerText=
+    monthlyTeam[
+        monthlyTimekeeperIndex
+    ];
+
+
+document
+    .getElementById("monthlyNextModerator")
+    .innerText=
+    monthlyTeam[
+        monthlyNextModeratorIndex
+    ];
+
+
+document
+    .getElementById("monthlyNextTimekeeper")
+    .innerText=
+    monthlyTeam[
+        monthlyNextTimekeeperIndex
+    ];
+
+
+
+/* =========================
+   MONTHLY LABELS
+========================= */
+
+document
+    .getElementById("monthlyCurrentLabel")
+    .innerText=
+    `This month · ${currentMonthName}`;
+
+
+document
+    .getElementById("monthlyNextLabel")
+    .innerText=
+    `Next month · ${nextMonthName}`;
+
 
 </script>
 
-</div>
-
-
-
-<!-- =========================
-     TAB SWITCHING
-========================= -->
-
-<script>
-
-function showTab(tabId){
-
-  document
-    .querySelectorAll(
-      ".content-section"
-    )
-    .forEach(
-      section => {
-
-        section
-          .classList
-          .remove(
-            "active"
-          );
-
-      }
-    );
-
-
-  document
-    .querySelectorAll(
-      ".tab-button"
-    )
-    .forEach(
-      button => {
-
-        button
-          .classList
-          .remove(
-            "active"
-          );
-
-      }
-    );
-
-
-  document
-    .getElementById(
-      tabId
-    )
-    .classList
-    .add(
-      "active"
-    );
-
-
-  event
-    .target
-    .classList
-    .add(
-      "active"
-    );
-
-}
-
-</script>
 
 </body>
+
 </html>
