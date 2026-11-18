@@ -273,8 +273,13 @@ tr:not(:last-child) td{
 
 
 .weekly-questions{
-    padding-left:22px;
+    list-style:none;
+    padding:0;
     margin:8px 0 0;
+}
+
+.weekly-questions > [aria-current="true"]{
+    font-weight:700;
 }
 
 .weekly-guidelines{
@@ -624,7 +629,7 @@ li{
 
     <div class="card">
         <h2>Teamfrågor</h2>
-        <ol class="weekly-questions">
+        <ol class="weekly-questions" role="list">
             <li>Vad har gått smidigare än förväntat i ditt arbete den senaste veckan?</li>
             <li>När tänkte du senast på E.ONs slutkunder i ditt arbete? Berätta kort om situationen och vad som fick dig att tänka på dem.</li>
             <li>När utmanade du senast någon du jobbar med att tänka annorlunda, och hur tog du upp det? Det kan till exempel handla om mångfald, kandidathantering eller ett arbetssätt som du såg kunde fungera bättre.</li>
@@ -1519,6 +1524,20 @@ document
     .innerText=
     `Next week · v${nextWeek}`;
 
+
+
+/* The first team question was used in the week of 16 November 2026. */
+const firstQuestionMonday = new Date(2026, 10, 16);
+const weeklyQuestions = document.querySelectorAll(".weekly-questions > li");
+const weeksSinceFirstQuestion = Math.round(
+    (currentMonday - firstQuestionMonday) / millisecondsPerWeek
+);
+const weeklyQuestionCount = weeklyQuestions.length;
+const weeklyQuestionIndex = (
+    (weeksSinceFirstQuestion % weeklyQuestionCount) + weeklyQuestionCount
+) % weeklyQuestionCount;
+
+weeklyQuestions[weeklyQuestionIndex].setAttribute("aria-current", "true");
 
 
 /* =====================================================
