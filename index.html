@@ -1,6 +1,5 @@
 
 
-
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -279,7 +278,30 @@ tr:not(:last-child) td{
 }
 
 .weekly-questions > [aria-current="true"]{
+    background:#f3e8fa;
+    border-radius:13px;
+    padding:16px 18px;
+    font-size:1.25em;
     font-weight:700;
+    line-height:1.35;
+    margin-bottom:16px;
+}
+
+.weekly-question-label{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    margin-bottom:10px;
+    color:#6e2983;
+    font-size:0.9375rem;
+}
+
+.weekly-question-label::before{
+    content:"";
+    flex:0 0 14px;
+    height:18px;
+    background:var(--eon-purple);
+    clip-path:polygon(52% 0, 88% 0, 65% 37%, 100% 37%, 24% 100%, 40% 56%, 0 56%);
 }
 
 .weekly-guidelines{
@@ -1526,18 +1548,44 @@ document
 
 
 
-/* The first team question was used in the week of 16 November 2026. */
+/* Monday keeps today's meeting question. Tuesday through Sunday show the following Monday. */
+const stockholmDateParts = new Intl.DateTimeFormat("sv-SE", {
+    timeZone:"Europe/Stockholm",
+    year:"numeric",
+    month:"numeric",
+    day:"numeric"
+}).formatToParts(new Date());
+const { year, month, day } = Object.fromEntries(
+    stockholmDateParts.map(({ type, value }) => [type, value])
+);
+const stockholmToday = new Date(Number(year), Number(month) - 1, Number(day));
+const questionMeetingMonday = getMonday(stockholmToday);
+if (stockholmToday.getDay() !== 1) {
+    questionMeetingMonday.setDate(questionMeetingMonday.getDate() + 7);
+}
+
+/* The first team question was used at the 16 November 2026 meeting. */
 const firstQuestionMonday = new Date(2026, 10, 16);
 const weeklyQuestions = document.querySelectorAll(".weekly-questions > li");
 const weeksSinceFirstQuestion = Math.round(
-    (currentMonday - firstQuestionMonday) / millisecondsPerWeek
+    (questionMeetingMonday - firstQuestionMonday) / millisecondsPerWeek
 );
 const weeklyQuestionCount = weeklyQuestions.length;
 const weeklyQuestionIndex = (
     (weeksSinceFirstQuestion % weeklyQuestionCount) + weeklyQuestionCount
 ) % weeklyQuestionCount;
 
-weeklyQuestions[weeklyQuestionIndex].setAttribute("aria-current", "true");
+const highlightedQuestion = weeklyQuestions[weeklyQuestionIndex];
+const questionLabel = document.createElement("span");
+questionLabel.className = "weekly-question-label";
+const questionMeetingDate = questionMeetingMonday.toLocaleDateString("sv-SE", {
+    weekday:"long",
+    day:"numeric",
+    month:"long"
+});
+questionLabel.textContent = `Veckans fråga · ${questionMeetingDate}`;
+highlightedQuestion.setAttribute("aria-current", "true");
+highlightedQuestion.prepend(questionLabel);
 
 
 /* =====================================================
