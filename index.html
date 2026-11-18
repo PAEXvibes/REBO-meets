@@ -48,26 +48,6 @@ body{
    TABS
 ========================= */
 
-.button-container{
-    text-align:center;
-    margin-bottom:20px;
-}
-
-.tab-button{
-    background-color:#E30613;
-    color:white;
-    border:none;
-    padding:12px 24px;
-    margin:0 5px;
-    border-radius:5px;
-    cursor:pointer;
-    font-size:16px;
-}
-
-.tab-button.active{
-    background-color:#6F2C91;
-}
-
 .content-section{
     display:none;
     background:white;
@@ -271,61 +251,6 @@ tr:not(:last-child) td{
 }
 
 
-.weekly-questions{
-    list-style:none;
-    padding:0;
-    margin:8px 0 0;
-}
-
-.weekly-questions > [aria-current="true"]{
-    background:#f3e8fa;
-    border-radius:13px;
-    padding:16px 18px;
-    font-size:1.25em;
-    font-weight:700;
-    line-height:1.35;
-    margin-bottom:16px;
-}
-
-.weekly-question-label{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    margin-bottom:10px;
-    color:#6e2983;
-    font-size:0.9375rem;
-}
-
-.weekly-question-label::before{
-    content:"";
-    flex:0 0 14px;
-    height:18px;
-    background:var(--eon-purple);
-    clip-path:polygon(52% 0, 88% 0, 65% 37%, 100% 37%, 24% 100%, 40% 56%, 0 56%);
-}
-
-.weekly-guidelines{
-    border-top:1px solid #eee;
-    margin-top:18px;
-    padding-top:12px;
-    font-size:14px;
-}
-
-.weekly-guidelines summary{
-    color:var(--eon-purple);
-    font-weight:700;
-    cursor:pointer;
-}
-
-.weekly-agenda-scroll{
-    overflow-x:auto;
-}
-
-#weekly .dual-rolebox{
-    max-width:100%;
-}
-
-
 /* =========================
    GUIDELINES
 ========================= */
@@ -378,35 +303,349 @@ li{
 
 }
 
+/* Weekly view */
+body.weekly-view{
+    padding:clamp(16px,3.33vw,48px);
+    background:#f8f5f7;
+    color:#28202c;
+}
+
+.meeting-header{
+    max-width:1440px;
+    margin:0 auto 24px;
+}
+
+.weekly-view .meeting-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:14px 24px;
+    margin-bottom:32px;
+}
+
+.meeting-header h1{
+    margin:0;
+    text-align:left;
+    font-size:clamp(1.8rem,3.2vw,2.375rem);
+    line-height:1.15;
+}
+
+.button-container{
+    display:flex;
+    width:max-content;
+    max-width:100%;
+    gap:4px;
+    padding:4px;
+    margin:0 auto;
+    border:1px solid #e9dfeb;
+    border-radius:999px;
+    background:white;
+}
+
+.weekly-view .button-container{
+    margin:0;
+}
+
+.tab-button{
+    background:transparent;
+    color:#5e5263;
+    border:none;
+    padding:9px 18px;
+    border-radius:999px;
+    cursor:pointer;
+    font-size:0.9375rem;
+    font-weight:700;
+}
+
+.tab-button.active{
+    background:#761e85;
+    color:white;
+}
+
+.tab-button:focus-visible,
+#weekly a:focus-visible,
+#weekly summary:focus-visible{
+    outline:2px solid #761e85;
+    outline-offset:3px;
+}
+
+#weekly{
+    max-width:1440px;
+    margin:0 auto;
+    padding:0;
+    background:transparent;
+}
+
+.weekly-question-banner{
+    padding:clamp(20px,2.4vw,34px);
+    margin-bottom:24px;
+    color:white;
+    border-radius:22px;
+    background:linear-gradient(105deg,#c40e23,#651577);
+    box-shadow:0 8px 28px rgba(79,48,76,.13);
+}
+
+.weekly-question-header{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    flex-wrap:wrap;
+    gap:12px 20px;
+    margin-bottom:14px;
+}
+
+.weekly-question-header h2{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    margin:0;
+    color:inherit;
+    font-size:1.0625rem;
+}
+
+.weekly-question-header h2::before{
+    content:"";
+    flex:0 0 17px;
+    height:21px;
+    background:currentColor;
+    clip-path:polygon(52% 0,88% 0,65% 37%,100% 37%,24% 100%,40% 56%,0 56%);
+}
+
+.weekly-question-date{
+    padding:8px 16px;
+    border-radius:999px;
+    color:#671674;
+    background:#f5e4f5;
+    font-weight:700;
+    font-size:.9375rem;
+    text-transform:capitalize;
+}
+
+.weekly-featured-question{
+    max-width:70ch;
+    margin:0;
+    font-size:clamp(1.25rem,2.1vw,1.7rem);
+    font-weight:700;
+    line-height:1.35;
+}
+
+.weekly-role-cards,
+.weekly-content-cards{
+    display:grid;
+    gap:24px;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+}
+
+.weekly-role-cards{
+    margin-bottom:24px;
+}
+
+.weekly-content-cards{
+    grid-template-columns:minmax(0,1.19fr) minmax(0,1fr);
+}
+
+.weekly-panel{
+    min-width:0;
+    padding:clamp(18px,2vw,25px);
+    background:white;
+    border:1px solid #f0e9ef;
+    border-radius:20px;
+    box-shadow:0 8px 24px rgba(79,48,76,.08);
+}
+
+.weekly-role-card{
+    padding:16px 22px;
+    border-radius:16px;
+}
+
+.weekly-role-card h2{
+    margin:0 0 10px;
+    font-size:.9375rem;
+    color:#761e85;
+}
+
+.weekly-role-card dl{
+    display:grid;
+    grid-template-columns:repeat(2,minmax(0,1fr));
+    gap:10px 16px;
+    margin:0;
+}
+
+.weekly-role-card dl > div{
+    display:flex;
+    align-items:baseline;
+    flex-wrap:wrap;
+    gap:4px 10px;
+}
+
+.weekly-role-card dt{
+    color:#5e5263;
+    font-size:.875rem;
+}
+
+.weekly-role-card dd{
+    margin:0;
+    font-weight:700;
+}
+
+.weekly-panel-heading{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    flex-wrap:wrap;
+    gap:10px;
+    margin-bottom:18px;
+}
+
+.weekly-panel-heading h2{
+    color:#28202c;
+    margin:0;
+    font-size:1.5rem;
+}
+
+#weeklyClock{
+    margin:0;
+    padding:7px 13px;
+    background:#f2e6f5;
+    color:#761e85;
+    border-radius:12px;
+    font-size:1.375rem;
+    font-variant-numeric:tabular-nums;
+}
+
+.weekly-agenda-table th,
+.weekly-agenda-table td{
+    padding:10px 12px;
+}
+
+.weekly-agenda-table th{
+    color:#761e85;
+    background:#faf5fa;
+    font-size:.875rem;
+}
+
+.weekly-agenda-table td:first-child{
+    white-space:nowrap;
+    font-variant-numeric:tabular-nums;
+    font-weight:700;
+}
+
+.weekly-agenda-table td:nth-child(2){
+    color:#5e5263;
+}
+
+.weekly-agenda-table .weekly-agenda-question td{
+    background:#f7eef8;
+}
+
+.weekly-agenda-question td:first-child{
+    color:#c71528;
+}
+
+.weekly-agenda-question td:last-child{
+    font-weight:700;
+}
+
+.weekly-agenda-footer{
+    display:flex;
+    justify-content:space-between;
+    align-items:flex-start;
+    flex-wrap:wrap;
+    gap:12px 16px;
+    border-top:1px solid #eee8ee;
+    margin-top:18px;
+    padding-top:12px;
+}
+
+.weekly-agenda-footer:has(details[open]) .weekly-guidelines{
+    flex-basis:100%;
+}
+
+.weekly-guidelines{
+    padding:8px 0;
+    font-size:.9375rem;
+}
+
+.weekly-guidelines summary{
+    color:#761e85;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.weekly-agenda-footer a{
+    display:inline-block;
+    padding:8px 14px;
+    border-radius:999px;
+    background:#f2e6f5;
+    color:#761e85;
+    font-size:.875rem;
+    font-weight:700;
+    text-decoration:none;
+}
+
+.weekly-agenda-footer a:hover{
+    text-decoration:underline;
+}
+
+.weekly-questions{
+    list-style:none;
+    padding:0;
+    margin:0;
+}
+
+.weekly-questions > li{
+    margin:0;
+    padding:9px 0;
+    line-height:1.45;
+    border-bottom:1px solid #eee8ee;
+}
+
+.weekly-questions > li:last-of-type,
+.weekly-questions > li:has(+ li[hidden]:last-child){
+    border-bottom:0;
+}
+
+@media(max-width:760px){
+    .weekly-role-cards,
+    .weekly-content-cards{
+        grid-template-columns:1fr;
+        gap:14px;
+    }
+
+    .weekly-view .meeting-header{
+        margin-bottom:20px;
+    }
+
+    .weekly-agenda-table th,
+    .weekly-agenda-table td{
+        padding:8px 5px;
+    }
+}
+
 </style>
 
 </head>
 
 
-<body>
+<body class="weekly-view">
 
 
 <!-- =====================================================
      TABS
 ===================================================== -->
 
-<div class="button-container">
-
-    <button
-        class="tab-button active"
-        onclick="showTab('weekly',this)"
-    >
-        Weekly
-    </button>
-
-    <button
-        class="tab-button"
-        onclick="showTab('monthly',this)"
-    >
-        Monthly
-    </button>
-
-</div>
+<header class="meeting-header">
+    <h1 id="weeklyHeading">REBO Weekly meeting</h1>
+    <nav class="button-container" aria-label="Mötesvyer">
+        <button type="button" class="tab-button active" aria-pressed="true" aria-controls="weekly" onclick="showTab('weekly',this)">
+            Weekly
+        </button>
+        <button type="button" class="tab-button" aria-pressed="false" aria-controls="monthly" onclick="showTab('monthly',this)">
+            Monthly
+        </button>
+    </nav>
+</header>
 
 
 
@@ -415,243 +654,113 @@ li{
 ===================================================== -->
 
 <div id="weekly" class="content-section active">
-
-<h1>REBO Weekly meeting</h1>
-
-
-<div class="topbar">
-
-
-    <!-- WEEKLY ROLES -->
-
-    <div
-        class="rolebox dual-rolebox"
-        aria-label="Weekly roles"
-    >
-
-
-        <!-- THIS WEEK -->
-
-        <div class="roleperiod">
-
-            <div
-                class="roleperiod-title"
-                id="weeklyCurrentLabel"
-            >
-                This week
-            </div>
-
-            <div class="roleline">
-
-                <div class="rolelabel">
-                    Moderator:
-                </div>
-
-                <div
-                    class="rolename"
-                    id="weeklyModerator"
-                >
-                    –
-                </div>
-
-            </div>
-
-            <div class="roleline">
-
-                <div class="rolelabel">
-                    Timekeeper:
-                </div>
-
-                <div
-                    class="rolename"
-                    id="weeklyTimekeeper"
-                >
-                    –
-                </div>
-
-            </div>
-
+    <section class="weekly-question-banner" id="weeklyQuestionBanner" aria-labelledby="weeklyQuestionTitle" hidden>
+        <div class="weekly-question-header">
+            <h2 id="weeklyQuestionTitle">Veckans fråga</h2>
+            <time class="weekly-question-date" id="weeklyQuestionDate"></time>
         </div>
+        <p class="weekly-featured-question" id="weeklyFeaturedQuestion"></p>
+    </section>
 
+    <div class="weekly-role-cards">
+        <section class="weekly-panel weekly-role-card" aria-labelledby="weeklyCurrentLabel">
+            <h2 id="weeklyCurrentLabel">Den här veckan</h2>
+            <dl>
+                <div><dt>Moderator</dt><dd id="weeklyModerator">–</dd></div>
+                <div><dt>Timekeeper</dt><dd id="weeklyTimekeeper">–</dd></div>
+            </dl>
+        </section>
 
-
-        <!-- NEXT WEEK -->
-
-        <div class="roleperiod">
-
-            <div
-                class="roleperiod-title"
-                id="weeklyNextLabel"
-            >
-                Next week
-            </div>
-
-            <div class="roleline">
-
-                <div class="rolelabel">
-                    Moderator:
-                </div>
-
-                <div
-                    class="rolename"
-                    id="weeklyNextModerator"
-                >
-                    –
-                </div>
-
-            </div>
-
-            <div class="roleline">
-
-                <div class="rolelabel">
-                    Timekeeper:
-                </div>
-
-                <div
-                    class="rolename"
-                    id="weeklyNextTimekeeper"
-                >
-                    –
-                </div>
-
-            </div>
-
-        </div>
-
-
+        <section class="weekly-panel weekly-role-card" aria-labelledby="weeklyNextLabel">
+            <h2 id="weeklyNextLabel">Nästa vecka</h2>
+            <dl>
+                <div><dt>Moderator</dt><dd id="weeklyNextModerator">–</dd></div>
+                <div><dt>Timekeeper</dt><dd id="weeklyNextTimekeeper">–</dd></div>
+            </dl>
+        </section>
     </div>
 
-</div>
+    <div class="weekly-content-cards">
+        <section class="weekly-panel" aria-labelledby="weeklyAgendaTitle">
+            <div class="weekly-panel-heading">
+                <h2 id="weeklyAgendaTitle">Agenda</h2>
+                <div class="clock" id="weeklyClock" title="Aktuell tid i Stockholm">--:--</div>
+            </div>
 
-
-
-<!-- WEEKLY CONTENT -->
-
-<div class="container">
-    <div class="card">
-        <div class="clock" id="weeklyClock">--:--</div>
-        <h2>Agenda</h2>
-
-        <div class="weekly-agenda-scroll">
-            <table>
+            <table class="weekly-agenda-table" aria-labelledby="weeklyAgendaTitle">
                 <thead>
                     <tr>
-                        <th scope="col" style="width:52px">#</th>
-                        <th scope="col" style="width:86px">Time</th>
-                        <th scope="col" style="width:150px">Person</th>
-                        <th scope="col">Agenda</th>
+                        <th scope="col">Tid</th>
+                        <th scope="col">Ansvarig</th>
+                        <th scope="col">Punkt</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
-                        <td>1</td>
-                        <td>8.15</td>
+                        <td><time datetime="08:15">08:15</time></td>
                         <td>Moderator</td>
                         <td>Incheckning</td>
                     </tr>
-                    <tr>
-                        <td>2</td>
-                        <td>8.16</td>
+                    <tr class="weekly-agenda-question">
+                        <td><time datetime="08:16">08:16</time></td>
                         <td>Moderator</td>
                         <td>Teamfråga</td>
                     </tr>
                     <tr>
-                        <td>3</td>
-                        <td>8.21</td>
+                        <td><time datetime="08:21">08:21</time></td>
                         <td>Chef</td>
                         <td>Info om veckan</td>
                     </tr>
                     <tr>
-                        <td>4</td>
-                        <td>8.26</td>
+                        <td><time datetime="08:26">08:26</time></td>
                         <td>Alla</td>
                         <td>Uppdateringar, problem, hjälp</td>
                     </tr>
                     <tr>
-                        <td>5</td>
-                        <td>8.45</td>
+                        <td><time datetime="08:45">08:45</time></td>
                         <td>Moderator</td>
                         <td>Allokering av rekryteringar</td>
                     </tr>
                     <tr>
-                        <td>6</td>
-                        <td>8.50</td>
+                        <td><time datetime="08:50">08:50</time></td>
                         <td>Timekeeper</td>
                         <td>Actions</td>
                     </tr>
                     <tr>
-                        <td>7</td>
-                        <td>8.52</td>
+                        <td><time datetime="08:52">08:52</time></td>
                         <td>Alla</td>
                         <td>Feedback på mötet</td>
                     </tr>
                 </tbody>
             </table>
-        </div>
 
-        <details class="weekly-guidelines">
-            <summary>REBO Guidelines</summary>
-            <ul>
+            <div class="weekly-agenda-footer">
+                <details class="weekly-guidelines">
+                    <summary>REBO Guidelines</summary>
+                    <ul>
+                    <li>We start and end in time</li>
+                    <li>We come prepared to the meeting</li>
+                    <li>There will always be a moderator and timekeeper</li>
+                    <li>If you are not present, hand over the information to someone else</li>
+                    <li>We act with good intentions</li>
+                    <li>We listen to each other</li>
+                    <li>We help each other and offer support</li>
+                    <li>We dare to tell our thoughts</li>
+                    <li>We give constructive feedback</li>
+                    <li>We give sensitive feedback in JF</li>
+                    </ul>
+                </details>
+                <a href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&amp;tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a" target="_blank" rel="noopener">
+                    Actions · REBO Planner
+                </a>
+            </div>
+        </section>
 
-                <li>
-                    We start and end in time
-                </li>
-
-                <li>
-                    We come prepared to the meeting
-                </li>
-
-                <li>
-                    There will always be a moderator and timekeeper
-                </li>
-
-                <li>
-                    If you are not present, hand over the information to someone else
-                </li>
-
-                <li>
-                    We act with good intentions
-                </li>
-
-                <li>
-                    We listen to each other
-                </li>
-
-                <li>
-                    We help each other and offer support
-                </li>
-
-                <li>
-                    We dare to tell our thoughts
-                </li>
-
-                <li>
-                    We give constructive feedback
-                </li>
-
-                <li>
-                    We give sensitive feedback in JF
-                </li>
-
-            </ul>
-        </details>
-
-        <div class="actions-box">
-
-            <a
-                href="https://teams.microsoft.com/l/entity/com.microsoft.teamspace.tab.planner/_djb2_msteams_prefix_1812266697?context=%7B%22channelId%22%3A%2219%3A9fbb919437a84059bff6395c20a981bb%40thread.skype%22%7D&tenantId=b914a242-e718-443b-a47c-6b4c649d8c0a"
-                target="_blank"
-                rel="noopener"
-            >
-                ✅ Actions – REBO Planner
-            </a>
-
-        </div>
-    </div>
-
-    <div class="card">
-        <h2>Teamfrågor</h2>
-        <ol class="weekly-questions" role="list">
+        <section class="weekly-panel" aria-labelledby="weeklyQuestionsTitle">
+            <div class="weekly-panel-heading">
+                <h2 id="weeklyQuestionsTitle">Teamfrågor</h2>
+            </div>
+            <ol class="weekly-questions" role="list">
             <li>Vad har gått smidigare än förväntat i ditt arbete den senaste veckan?</li>
             <li>När tänkte du senast på E.ONs slutkunder i ditt arbete? Berätta kort om situationen och vad som fick dig att tänka på dem.</li>
             <li>När utmanade du senast någon du jobbar med att tänka annorlunda, och hur tog du upp det? Det kan till exempel handla om mångfald, kandidathantering eller ett arbetssätt som du såg kunde fungera bättre.</li>
@@ -660,12 +769,10 @@ li{
             <li>Vilken fråga från en kandidat, chef eller kollega har fått dig att stanna upp och tänka till på sistone?</li>
             <li>När har ett samarbete i teamet gjort skillnad den senaste tiden, och vad gjorde att det fungerade bra?</li>
             <li>Hur har du använt ett digitalt verktyg för att göra ett moment i ditt arbete enklare eller bättre?</li>
-        </ol>
+            </ol>
+        </section>
     </div>
 </div>
-
-</div>
-
 
 
 <!-- =====================================================
@@ -1087,6 +1194,7 @@ function showTab(tabId,button){
         .forEach(tabButton=>{
 
             tabButton.classList.remove("active");
+            tabButton.setAttribute("aria-pressed", "false");
 
         });
 
@@ -1097,6 +1205,11 @@ function showTab(tabId,button){
 
 
     button.classList.add("active");
+    button.setAttribute("aria-pressed", "true");
+
+    const isWeekly = tabId === "weekly";
+    document.body.classList.toggle("weekly-view", isWeekly);
+    document.getElementById("weeklyHeading").hidden = !isWeekly;
 
 }
 
@@ -1538,13 +1651,13 @@ document
 document
     .getElementById("weeklyCurrentLabel")
     .innerText=
-    `This week · v${currentWeek}`;
+    `Den här veckan · v. ${currentWeek}`;
 
 
 document
     .getElementById("weeklyNextLabel")
     .innerText=
-    `Next week · v${nextWeek}`;
+    `Nästa vecka · v. ${nextWeek}`;
 
 
 
@@ -1576,16 +1689,21 @@ const weeklyQuestionIndex = (
 ) % weeklyQuestionCount;
 
 const highlightedQuestion = weeklyQuestions[weeklyQuestionIndex];
-const questionLabel = document.createElement("span");
-questionLabel.className = "weekly-question-label";
-const questionMeetingDate = questionMeetingMonday.toLocaleDateString("sv-SE", {
+const meetingDateElement = document.getElementById("weeklyQuestionDate");
+const meetingYear = questionMeetingMonday.getFullYear();
+const meetingMonth = String(questionMeetingMonday.getMonth() + 1).padStart(2, "0");
+const meetingDay = String(questionMeetingMonday.getDate()).padStart(2, "0");
+
+meetingDateElement.dateTime = `${meetingYear}-${meetingMonth}-${meetingDay}`;
+meetingDateElement.textContent = questionMeetingMonday.toLocaleDateString("sv-SE", {
     weekday:"long",
     day:"numeric",
     month:"long"
 });
-questionLabel.textContent = `Veckans fråga · ${questionMeetingDate}`;
-highlightedQuestion.setAttribute("aria-current", "true");
-highlightedQuestion.prepend(questionLabel);
+document.getElementById("weeklyFeaturedQuestion").textContent = highlightedQuestion.textContent;
+highlightedQuestion.hidden = true;
+document.getElementById("weeklyQuestionsTitle").textContent = "Övriga teamfrågor";
+document.getElementById("weeklyQuestionBanner").hidden = false;
 
 
 /* =====================================================
