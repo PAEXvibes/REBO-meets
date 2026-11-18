@@ -1,3 +1,6 @@
+
+
+
 <!DOCTYPE html>
 <html lang="sv">
 
@@ -269,63 +272,30 @@ tr:not(:last-child) td{
 }
 
 
-/* =========================
-   WEEKLY AGENDA DETAILS
-========================= */
+.weekly-questions{
+    padding-left:22px;
+    margin:8px 0 0;
+}
 
-.agenda-details{
-    margin-top:8px;
+.weekly-guidelines{
+    border-top:1px solid #eee;
+    margin-top:18px;
+    padding-top:12px;
     font-size:14px;
-    line-height:1.5;
 }
 
-.agenda-details span{
-    display:block;
-    margin-top:4px;
+.weekly-guidelines summary{
+    color:var(--eon-purple);
+    font-weight:700;
+    cursor:pointer;
 }
 
-.bold{
-    font-weight:800;
-    color:var(--eon-red);
+.weekly-agenda-scroll{
+    overflow-x:auto;
 }
 
-
-/* =========================
-   INFO TOOLTIP
-========================= */
-
-.info{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width:20px;
-    height:20px;
-    border-radius:999px;
-    margin-left:8px;
-    background:var(--gradient);
-    color:#fff;
-    font-size:13px;
-    font-weight:800;
-    cursor:default;
-    vertical-align:middle;
-}
-
-.info img{
-    position:absolute;
-    top:26px;
-    left:0;
-    width:624px;
-    max-width:min(80vw,624px);
-    border-radius:12px;
-    box-shadow:var(--shadow);
-    display:none;
-    z-index:50;
-    background:#fff;
-}
-
-.info:hover img{
-    display:block;
+#weekly .dual-rolebox{
+    max-width:100%;
 }
 
 
@@ -423,39 +393,6 @@ li{
 
 
 <div class="topbar">
-
-
-    <!-- WEEKLY TIMER -->
-
-    <div class="timer-column">
-
-        <div
-            class="timer"
-            id="weeklyTimer"
-        >
-            05:00
-        </div>
-
-        <div class="timer-buttons">
-
-            <button
-                type="button"
-                onclick="startWeeklyTimer(5)"
-            >
-                5 min
-            </button>
-
-            <button
-                type="button"
-                onclick="startWeeklyTimer(15)"
-            >
-                15 min
-            </button>
-
-        </div>
-
-    </div>
-
 
 
     <!-- WEEKLY ROLES -->
@@ -564,238 +501,127 @@ li{
 <!-- WEEKLY CONTENT -->
 
 <div class="container">
-
-
-    <!-- LEFT -->
-
     <div class="card">
-
-        <div
-            class="clock"
-            id="weeklyClock"
-        >
-            --:--
-        </div>
-
-
+        <div class="clock" id="weeklyClock">--:--</div>
         <h2>Agenda</h2>
 
-
-        <table>
-
-            <tr>
-
-                <th style="width:52px;">
-                    #
-                </th>
-
-                <th style="width:86px;">
-                    Time
-                </th>
-
-                <th style="width:150px;">
-                    Person
-                </th>
-
-                <th>
-                    Agenda
-                </th>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>1</td>
-
-                <td>8.15</td>
-
-                <td>Moderator</td>
-
-                <td>
-
-                    Team success
-
-                    <span
-                        class="info"
-                        title="Team Success info"
-                    >
-                        i
-
-                        <img
-                            src="team-success.png"
-                            alt="Team Success"
-                        >
-
-                    </span>
-
-
-                    <div
-                        class="agenda-details"
-                        id="mondays"
-                    >
-
-                        <span>
-                            1st Monday: Gratitude circle
-                        </span>
-
-                        <span>
-                            2nd Monday: Acknowledge others
-                        </span>
-
-                        <span>
-                            3rd Monday: Be proud in a short sentence
-                        </span>
-
-                        <span>
-                            4th Monday: What have you learned lately in a short sentence
-                        </span>
-
-                    </div>
-
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>2</td>
-
-                <td>8.20</td>
-
-                <td>Manager</td>
-
-                <td>
-                    Management update
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>3</td>
-
-                <td>8.25</td>
-
-                <td>All</td>
-
-                <td>
-                    Update, highlights, problem, help
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>4</td>
-
-                <td>8.40</td>
-
-                <td>Moderator</td>
-
-                <td>
-                    Allocating recruitments
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>5</td>
-
-                <td>8.45</td>
-
-                <td>Timekeeper</td>
-
-                <td>
-                    Actions forward
-                </td>
-
-            </tr>
-
-
-
-            <tr>
-
-                <td>6</td>
-
-                <td>8.50</td>
-
-                <td>All</td>
-
-                <td>
-                    Feedback meeting
-                </td>
-
-            </tr>
-
-        </table>
-
+        <div class="weekly-agenda-scroll">
+            <table>
+                <thead>
+                    <tr>
+                        <th scope="col" style="width:52px">#</th>
+                        <th scope="col" style="width:86px">Time</th>
+                        <th scope="col" style="width:150px">Person</th>
+                        <th scope="col">Agenda</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>1</td>
+                        <td>8.15</td>
+                        <td>Moderator</td>
+                        <td>Incheckning</td>
+                    </tr>
+                    <tr>
+                        <td>2</td>
+                        <td>8.16</td>
+                        <td>Moderator</td>
+                        <td>Teamfråga</td>
+                    </tr>
+                    <tr>
+                        <td>3</td>
+                        <td>8.21</td>
+                        <td>Chef</td>
+                        <td>Info om veckan</td>
+                    </tr>
+                    <tr>
+                        <td>4</td>
+                        <td>8.26</td>
+                        <td>Alla</td>
+                        <td>Uppdateringar, problem, hjälp</td>
+                    </tr>
+                    <tr>
+                        <td>5</td>
+                        <td>8.45</td>
+                        <td>Moderator</td>
+                        <td>Allokering av rekryteringar</td>
+                    </tr>
+                    <tr>
+                        <td>6</td>
+                        <td>8.50</td>
+                        <td>Timekeeper</td>
+                        <td>Actions</td>
+                    </tr>
+                    <tr>
+                        <td>7</td>
+                        <td>8.52</td>
+                        <td>Alla</td>
+                        <td>Feedback på mötet</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-
-
-    <!-- RIGHT -->
-
     <div class="card">
+        <h2>Teamfrågor</h2>
+        <ol class="weekly-questions">
+            <li>Vad har gått smidigare än förväntat i ditt arbete den senaste veckan?</li>
+            <li>När tänkte du senast på E.ONs slutkunder i ditt arbete? Berätta kort om situationen och vad som fick dig att tänka på dem.</li>
+            <li>När utmanade du senast någon du jobbar med att tänka annorlunda, och hur tog du upp det? Det kan till exempel handla om mångfald, kandidathantering eller ett arbetssätt som du såg kunde fungera bättre.</li>
+            <li>Vilket resultat från ditt arbete på sistone skulle du vilja lyfta som ett exempel på vad vårt team bidrar med?</li>
+            <li>Vad har hjälpt dig att spara tid i jobbet den senaste tiden?</li>
+            <li>Vilken fråga från en kandidat, chef eller kollega har fått dig att stanna upp och tänka till på sistone?</li>
+            <li>När har ett samarbete i teamet gjort skillnad den senaste tiden, och vad gjorde att det fungerade bra?</li>
+            <li>Hur har du använt ett digitalt verktyg för att göra ett moment i ditt arbete enklare eller bättre?</li>
+        </ol>
 
-        <h2>
-            REBO Guidelines
-        </h2>
+        <details class="weekly-guidelines">
+            <summary>REBO Guidelines</summary>
+            <ul>
 
-        <ul>
+                <li>
+                    We start and end in time
+                </li>
 
-            <li>
-                We start and end in time
-            </li>
+                <li>
+                    We come prepared to the meeting
+                </li>
 
-            <li>
-                We come prepared to the meeting
-            </li>
+                <li>
+                    There will always be a moderator and timekeeper
+                </li>
 
-            <li>
-                There will always be a moderator and timekeeper
-            </li>
+                <li>
+                    If you are not present, hand over the information to someone else
+                </li>
 
-            <li>
-                If you are not present, hand over the information to someone else
-            </li>
+                <li>
+                    We act with good intentions
+                </li>
 
-            <li>
-                We act with good intentions
-            </li>
+                <li>
+                    We listen to each other
+                </li>
 
-            <li>
-                We listen to each other
-            </li>
+                <li>
+                    We help each other and offer support
+                </li>
 
-            <li>
-                We help each other and offer support
-            </li>
+                <li>
+                    We dare to tell our thoughts
+                </li>
 
-            <li>
-                We dare to tell our thoughts
-            </li>
+                <li>
+                    We give constructive feedback
+                </li>
 
-            <li>
-                We give constructive feedback
-            </li>
+                <li>
+                    We give sensitive feedback in JF
+                </li>
 
-            <li>
-                We give sensitive feedback in JF
-            </li>
-
-        </ul>
-
+            </ul>
+        </details>
 
         <div class="actions-box">
 
@@ -808,10 +634,7 @@ li{
             </a>
 
         </div>
-
     </div>
-
-
 </div>
 
 </div>
@@ -1300,76 +1123,6 @@ setInterval(
 
 
 /* =========================
-   WEEKLY TIMER
-========================= */
-
-let weeklyTimerInterval;
-
-
-function startWeeklyTimer(minutes){
-
-    clearInterval(
-        weeklyTimerInterval
-    );
-
-
-    let seconds=
-        minutes*60;
-
-
-    function renderWeeklyTimer(){
-
-        const min=
-            String(
-                Math.floor(seconds/60)
-            )
-            .padStart(2,"0");
-
-
-        const sec=
-            String(
-                seconds%60
-            )
-            .padStart(2,"0");
-
-
-        document
-            .getElementById("weeklyTimer")
-            .innerText=
-            `${min}:${sec}`;
-
-    }
-
-
-    renderWeeklyTimer();
-
-
-    weeklyTimerInterval=
-        setInterval(()=>{
-
-            seconds--;
-
-
-            if(seconds<0){
-
-                clearInterval(
-                    weeklyTimerInterval
-                );
-
-                return;
-
-            }
-
-
-            renderWeeklyTimer();
-
-        },1000);
-
-}
-
-
-
-/* =========================
    MONTHLY TIMER
 ========================= */
 
@@ -1769,46 +1522,6 @@ document
 
 
 /* =====================================================
-   WEEKLY MONDAY ACTIVITY
-===================================================== */
-
-const mondayIndex=
-    (
-        (
-            currentWeek-14
-        )
-        %
-        4
-        +
-        4
-    )
-    %
-    4;
-
-
-const mondayLines=
-    document.querySelectorAll(
-        "#mondays span"
-    );
-
-
-if(
-    mondayLines[
-        mondayIndex
-    ]
-){
-
-    mondayLines[
-        mondayIndex
-    ]
-    .classList
-    .add("bold");
-
-}
-
-
-
-/* =====================================================
    MONTHLY ROTATION
    Changes ONLY on the 1st of each month
 ===================================================== */
@@ -2001,3 +1714,7 @@ document
 </body>
 
 </html>
+
+
+
+
